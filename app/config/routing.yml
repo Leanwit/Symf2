@@ -1,0 +1,4 @@
+witzke_curso:
+    resource: "@WitzkeCursoBundle/Resources/config/routing.yml"
+    prefix:   /Curso
+
