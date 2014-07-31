@@ -1,0 +1,7 @@
+parameters:
+#    witzke_curso.example.class: Witzke\CursoBundle\Example
+
+services:
+#    witzke_curso.example:
+#        class: %witzke_curso.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
