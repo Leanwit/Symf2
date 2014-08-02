@@ -1,6 +1,6 @@
 <?php
 
-namespace Witzke\FacturaBundle\Repository\Entity;
+namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Detalle
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\DetalleRepository")
+ * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\DetalleRepository")
  */
 class Detalle
 {

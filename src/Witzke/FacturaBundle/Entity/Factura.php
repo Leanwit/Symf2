@@ -1,6 +1,6 @@
 <?php
 
-namespace Witzke\FacturaBundle\Repository\Entity;
+namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Factura
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\FacturaRepository")
+ * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\FacturaRepository")
  */
 class Factura
 {
@@ -41,6 +41,24 @@ class Factura
      * @ORM\Column(name="total", type="float")
      */
     private $total;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Iva")
+     * @ORM\JoinColumn(name="iva_id", referencedColumnName="id")
+     */
+    private $iva;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="CondicionPago")
+     * @ORM\JoinColumn(name="condicionPago_id", referencedColumnName="id")
+     */
+    private $condicionPago;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Localidad")
+     * @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
+     */
+    private $localidad;
 
 
     /**

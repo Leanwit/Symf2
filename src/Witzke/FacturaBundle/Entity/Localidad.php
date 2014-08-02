@@ -1,6 +1,6 @@
 <?php
 
-namespace Witzke\FacturaBundle\Repository\Entity;
+namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Localidad
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\LocalidadRepository")
+ * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\LocalidadRepository")
  */
 class Localidad
 {
@@ -34,6 +34,12 @@ class Localidad
      * @ORM\Column(name="codigoPostal", type="string", length=255)
      */
     private $codigoPostal;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Provincia")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
+     */
+    private $provincia;
 
 
     /**
