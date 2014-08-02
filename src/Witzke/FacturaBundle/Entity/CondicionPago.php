@@ -1,16 +1,16 @@
 <?php
 
-namespace Witzke\CursoBundle\Entity;
+namespace Witzke\FacturaBundle\Repository\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Localidad
+ * CondicionPago
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Witzke\CursoBundle\Entity\LocalidadRepository")
+ * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\CondicionPagoRepository")
  */
-class Localidad
+class CondicionPago
 {
     /**
      * @var integer
@@ -28,13 +28,6 @@ class Localidad
      */
     private $descripcion;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="codigo_postal", type="string", length=15)
-     */
-    private $codigoPostal;
-
 
     /**
      * Get id
@@ -50,7 +43,7 @@ class Localidad
      * Set descripcion
      *
      * @param string $descripcion
-     * @return Localidad
+     * @return CondicionPago
      */
     public function setDescripcion($descripcion)
     {
@@ -67,28 +60,5 @@ class Localidad
     public function getDescripcion()
     {
         return $this->descripcion;
-    }
-
-    /**
-     * Set codigoPostal
-     *
-     * @param string $codigoPostal
-     * @return Localidad
-     */
-    public function setCodigoPostal($codigoPostal)
-    {
-        $this->codigoPostal = $codigoPostal;
-
-        return $this;
-    }
-
-    /**
-     * Get codigoPostal
-     *
-     * @return string 
-     */
-    public function getCodigoPostal()
-    {
-        return $this->codigoPostal;
     }
 }

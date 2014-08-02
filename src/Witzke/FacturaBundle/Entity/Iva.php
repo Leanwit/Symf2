@@ -1,16 +1,16 @@
 <?php
 
-namespace Witzke\CursoBundle\Entity;
+namespace Witzke\FacturaBundle\Repository\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Provincia
+ * Iva
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Witzke\CursoBundle\Entity\ProvinciaRepository")
+ * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\IvaRepository")
  */
-class Provincia
+class Iva
 {
     /**
      * @var integer
@@ -43,7 +43,7 @@ class Provincia
      * Set descripcion
      *
      * @param string $descripcion
-     * @return Provincia
+     * @return Iva
      */
     public function setDescripcion($descripcion)
     {

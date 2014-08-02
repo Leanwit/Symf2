@@ -1,6 +1,6 @@
 <?php
 
-namespace Witzke\CursoBundle\Tests\Controller;
+namespace Witzke\FacturaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Witzke\CursoBundle\Entity;
+namespace Witzke\FacturaBundle\Repository\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Localidad
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Witzke\CursoBundle\Entity\LocalidadRepository")
+ * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\LocalidadRepository")
  */
 class Localidad
 {
@@ -31,7 +31,7 @@ class Localidad
     /**
      * @var string
      *
-     * @ORM\Column(name="codigo_postal", type="string", length=15)
+     * @ORM\Column(name="codigoPostal", type="string", length=255)
      */
     private $codigoPostal;
 

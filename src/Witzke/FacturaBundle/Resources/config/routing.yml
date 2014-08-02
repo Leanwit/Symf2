@@ -1,0 +1,3 @@
+factura_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FacturaBundle:Default:index }
