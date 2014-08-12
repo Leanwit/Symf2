@@ -1,0 +1,30 @@
+proveedor:
+    path:     /
+    defaults: { _controller: "FacturaBundle:Proveedor:index" }
+
+proveedor_show:
+    path:     /{id}/show
+    defaults: { _controller: "FacturaBundle:Proveedor:show" }
+
+proveedor_new:
+    path:     /new
+    defaults: { _controller: "FacturaBundle:Proveedor:new" }
+
+proveedor_create:
+    path:     /create
+    defaults: { _controller: "FacturaBundle:Proveedor:create" }
+    requirements: { _method: post }
+
+proveedor_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FacturaBundle:Proveedor:edit" }
+
+proveedor_update:
+    path:     /{id}/update
+    defaults: { _controller: "FacturaBundle:Proveedor:update" }
+    requirements: { _method: post|put }
+
+proveedor_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FacturaBundle:Proveedor:delete" }
+    requirements: { _method: post|delete }

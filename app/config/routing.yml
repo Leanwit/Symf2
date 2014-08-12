@@ -1,6 +1,6 @@
 factura:
     resource: "@FacturaBundle/Resources/config/routing.yml"
-    prefix:   /Factura
+    prefix:   /Eticsol
 
 
 

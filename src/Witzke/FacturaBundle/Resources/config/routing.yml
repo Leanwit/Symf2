@@ -20,3 +20,38 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+  
+FacturaBundle_detalle:
+    resource: "@FacturaBundle/Resources/config/routing/detalle.yml"
+    prefix:   /detalle   
+    
+FacturaBundle_condicion_pago:
+    resource: "@FacturaBundle/Resources/config/routing/condicionpago.yml"
+    prefix:   /condicionpago  
+ 
+FacturaBundle_iva:
+    resource: "@FacturaBundle/Resources/config/routing/iva.yml"
+    prefix:   /iva
+    
+FacturaBundle_localidad:
+    resource: "@FacturaBundle/Resources/config/routing/localidad.yml"
+    prefix:   /localidad
+    
+FacturaBundle_producto:
+    resource: "@FacturaBundle/Resources/config/routing/producto.yml"
+    prefix:   /producto
+    
+FacturaBundle_proveedor:
+    resource: "@FacturaBundle/Resources/config/routing/proveedor.yml"
+    prefix:   /proveedor
+    
+FacturaBundle_provincia:
+    resource: "@FacturaBundle/Resources/config/routing/provincia.yml"
+    prefix:   /provincia
+    
+FacturaBundle_factura:
+        resource: "@FacturaBundle/Resources/config/routing/factura.yml"
+        prefix:   /factura
+
+    
+

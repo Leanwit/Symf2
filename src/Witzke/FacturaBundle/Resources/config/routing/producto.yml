@@ -1,0 +1,30 @@
+producto:
+    path:     /
+    defaults: { _controller: "FacturaBundle:Producto:index" }
+
+producto_show:
+    path:     /{id}/show
+    defaults: { _controller: "FacturaBundle:Producto:show" }
+
+producto_new:
+    path:     /new
+    defaults: { _controller: "FacturaBundle:Producto:new" }
+
+producto_create:
+    path:     /create
+    defaults: { _controller: "FacturaBundle:Producto:create" }
+    requirements: { _method: post }
+
+producto_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FacturaBundle:Producto:edit" }
+
+producto_update:
+    path:     /{id}/update
+    defaults: { _controller: "FacturaBundle:Producto:update" }
+    requirements: { _method: post|put }
+
+producto_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FacturaBundle:Producto:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+condicionpago:
+    path:     /
+    defaults: { _controller: "FacturaBundle:CondicionPago:index" }
+
+condicionpago_show:
+    path:     /{id}/show
+    defaults: { _controller: "FacturaBundle:CondicionPago:show" }
+
+condicionpago_new:
+    path:     /new
+    defaults: { _controller: "FacturaBundle:CondicionPago:new" }
+
+condicionpago_create:
+    path:     /create
+    defaults: { _controller: "FacturaBundle:CondicionPago:create" }
+    requirements: { _method: post }
+
+condicionpago_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FacturaBundle:CondicionPago:edit" }
+
+condicionpago_update:
+    path:     /{id}/update
+    defaults: { _controller: "FacturaBundle:CondicionPago:update" }
+    requirements: { _method: post|put }
+
+condicionpago_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FacturaBundle:CondicionPago:delete" }
+    requirements: { _method: post|delete }

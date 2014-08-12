@@ -1,0 +1,30 @@
+iva:
+    path:     /
+    defaults: { _controller: "FacturaBundle:Iva:index" }
+
+iva_show:
+    path:     /{id}/show
+    defaults: { _controller: "FacturaBundle:Iva:show" }
+
+iva_new:
+    path:     /new
+    defaults: { _controller: "FacturaBundle:Iva:new" }
+
+iva_create:
+    path:     /create
+    defaults: { _controller: "FacturaBundle:Iva:create" }
+    requirements: { _method: post }
+
+iva_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FacturaBundle:Iva:edit" }
+
+iva_update:
+    path:     /{id}/update
+    defaults: { _controller: "FacturaBundle:Iva:update" }
+    requirements: { _method: post|put }
+
+iva_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FacturaBundle:Iva:delete" }
+    requirements: { _method: post|delete }

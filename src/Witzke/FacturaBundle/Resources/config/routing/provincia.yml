@@ -1,0 +1,30 @@
+provincia:
+    path:     /
+    defaults: { _controller: "FacturaBundle:Provincia:index" }
+
+provincia_show:
+    path:     /{id}/show
+    defaults: { _controller: "FacturaBundle:Provincia:show" }
+
+provincia_new:
+    path:     /new
+    defaults: { _controller: "FacturaBundle:Provincia:new" }
+
+provincia_create:
+    path:     /create
+    defaults: { _controller: "FacturaBundle:Provincia:create" }
+    requirements: { _method: post }
+
+provincia_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FacturaBundle:Provincia:edit" }
+
+provincia_update:
+    path:     /{id}/update
+    defaults: { _controller: "FacturaBundle:Provincia:update" }
+    requirements: { _method: post|put }
+
+provincia_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FacturaBundle:Provincia:delete" }
+    requirements: { _method: post|delete }

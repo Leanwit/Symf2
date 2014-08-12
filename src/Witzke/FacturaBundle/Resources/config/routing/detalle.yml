@@ -1,0 +1,30 @@
+detalle:
+    path:     /
+    defaults: { _controller: "FacturaBundle:Detalle:index" }
+
+detalle_show:
+    path:     /{id}/show
+    defaults: { _controller: "FacturaBundle:Detalle:show" }
+
+detalle_new:
+    path:     /new
+    defaults: { _controller: "FacturaBundle:Detalle:new" }
+
+detalle_create:
+    path:     /create
+    defaults: { _controller: "FacturaBundle:Detalle:create" }
+    requirements: { _method: post }
+
+detalle_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FacturaBundle:Detalle:edit" }
+
+detalle_update:
+    path:     /{id}/update
+    defaults: { _controller: "FacturaBundle:Detalle:update" }
+    requirements: { _method: post|put }
+
+detalle_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FacturaBundle:Detalle:delete" }
+    requirements: { _method: post|delete }

@@ -5,37 +5,37 @@ namespace Witzke\FacturaBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Witzke\FacturaBundle\Entity\Factura;
-use Witzke\FacturaBundle\Form\FacturaType;
+use Witzke\FacturaBundle\Entity\Provincia;
+use Witzke\FacturaBundle\Form\ProvinciaType;
 
 /**
- * Factura controller.
+ * Provincia controller.
  *
  */
-class FacturaController extends Controller
+class ProvinciaController extends Controller
 {
 
     /**
-     * Lists all Factura entities.
+     * Lists all Provincia entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('FacturaBundle:Factura')->findAll();
+        $entities = $em->getRepository('FacturaBundle:Provincia')->findAll();
 
-        return $this->render('FacturaBundle:Factura:index.html.twig', array(
+        return $this->render('FacturaBundle:Provincia:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Factura entity.
+     * Creates a new Provincia entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Factura();
+        $entity = new Provincia();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -44,26 +44,26 @@ class FacturaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('factura_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('provincia_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('FacturaBundle:Factura:new.html.twig', array(
+        return $this->render('FacturaBundle:Provincia:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Factura entity.
+     * Creates a form to create a Provincia entity.
      *
-     * @param Factura $entity The entity
+     * @param Provincia $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Factura $entity)
+    private function createCreateForm(Provincia $entity)
     {
-        $form = $this->createForm(new FacturaType(), $entity, array(
-            'action' => $this->generateUrl('factura_create'),
+        $form = $this->createForm(new ProvinciaType(), $entity, array(
+            'action' => $this->generateUrl('provincia_create'),
             'method' => 'POST',
         ));
 
@@ -73,60 +73,60 @@ class FacturaController extends Controller
     }
 
     /**
-     * Displays a form to create a new Factura entity.
+     * Displays a form to create a new Provincia entity.
      *
      */
     public function newAction()
     {
-        $entity = new Factura();
+        $entity = new Provincia();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('FacturaBundle:Factura:new.html.twig', array(
+        return $this->render('FacturaBundle:Provincia:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Factura entity.
+     * Finds and displays a Provincia entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('FacturaBundle:Factura')->find($id);
+        $entity = $em->getRepository('FacturaBundle:Provincia')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Factura entity.');
+            throw $this->createNotFoundException('Unable to find Provincia entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('FacturaBundle:Factura:show.html.twig', array(
+        return $this->render('FacturaBundle:Provincia:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Factura entity.
+     * Displays a form to edit an existing Provincia entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('FacturaBundle:Factura')->find($id);
+        $entity = $em->getRepository('FacturaBundle:Provincia')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Factura entity.');
+            throw $this->createNotFoundException('Unable to find Provincia entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('FacturaBundle:Factura:edit.html.twig', array(
+        return $this->render('FacturaBundle:Provincia:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -134,16 +134,16 @@ class FacturaController extends Controller
     }
 
     /**
-    * Creates a form to edit a Factura entity.
+    * Creates a form to edit a Provincia entity.
     *
-    * @param Factura $entity The entity
+    * @param Provincia $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Factura $entity)
+    private function createEditForm(Provincia $entity)
     {
-        $form = $this->createForm(new FacturaType(), $entity, array(
-            'action' => $this->generateUrl('factura_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ProvinciaType(), $entity, array(
+            'action' => $this->generateUrl('provincia_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -152,17 +152,17 @@ class FacturaController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Factura entity.
+     * Edits an existing Provincia entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('FacturaBundle:Factura')->find($id);
+        $entity = $em->getRepository('FacturaBundle:Provincia')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Factura entity.');
+            throw $this->createNotFoundException('Unable to find Provincia entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -172,17 +172,17 @@ class FacturaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('factura_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('provincia_edit', array('id' => $id)));
         }
 
-        return $this->render('FacturaBundle:Factura:edit.html.twig', array(
+        return $this->render('FacturaBundle:Provincia:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Factura entity.
+     * Deletes a Provincia entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -192,21 +192,21 @@ class FacturaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('FacturaBundle:Factura')->find($id);
+            $entity = $em->getRepository('FacturaBundle:Provincia')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Factura entity.');
+                throw $this->createNotFoundException('Unable to find Provincia entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('factura'));
+        return $this->redirect($this->generateUrl('provincia'));
     }
 
     /**
-     * Creates a form to delete a Factura entity by id.
+     * Creates a form to delete a Provincia entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -215,7 +215,7 @@ class FacturaController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('factura_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('provincia_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
