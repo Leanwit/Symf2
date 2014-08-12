@@ -27,8 +27,18 @@ class Detalle
      * @ORM\Column(name="cantidad", type="integer")
      */
     private $cantidad;
-
-
+   
+    /**
+     * @ORM\ManyToOne(targetEntity="Factura")
+     * @ORM\JoinColumn(name="factura_id", referencedColumnName="id")
+     */
+    private $factura;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Producto")
+     * @ORM\JoinColumn(name="producto_id", referencedColumnName="id")
+     */
+    private $producto;
     /**
      * Get id
      *

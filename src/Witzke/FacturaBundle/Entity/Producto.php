@@ -55,7 +55,12 @@ class Producto
      * @ORM\Column(name="fechaAlta", type="date")
      */
     private $fechaAlta;
-
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Proveedor")
+     * @ORM\JoinColumn(name="proveedor_id", referencedColumnName="id")
+     */
+    private $proveedor;
 
     /**
      * Get id
