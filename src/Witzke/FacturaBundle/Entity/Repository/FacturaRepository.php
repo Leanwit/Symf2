@@ -1,6 +1,6 @@
 <?php
 
-namespace Witzke\FacturaBundle\Entity;
+namespace Witzke\FacturaBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

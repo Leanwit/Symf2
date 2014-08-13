@@ -50,8 +50,8 @@ FacturaBundle_provincia:
     prefix:   /provincia
     
 FacturaBundle_factura:
-        resource: "@FacturaBundle/Resources/config/routing/factura.yml"
-        prefix:   /factura
+    resource: "@FacturaBundle/Resources/config/routing/factura.yml"
+    prefix:   /factura
 
     
 
