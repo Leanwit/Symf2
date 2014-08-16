@@ -62,7 +62,7 @@ class Factura
 
     
     /**
-     * @ORM\OneToMany(targetEntity="Detalle", mappedBy="factura" ,cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Detalle", mappedBy="factura")
       
      */
     private $detalles;
@@ -222,7 +222,7 @@ class Factura
      */
     public function __construct()
     {
-        $this->detallesz = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->detalles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

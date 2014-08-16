@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\LocalidadRepository")
  */
-class Localidad
-{
+class Localidad {
+
     /**
      * @var integer
      *
@@ -34,21 +34,19 @@ class Localidad
      * @ORM\Column(name="codigoPostal", type="string", length=255)
      */
     private $codigoPostal;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Provincia")
      * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
      */
     private $provincia;
 
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -58,8 +56,7 @@ class Localidad
      * @param string $descripcion
      * @return Localidad
      */
-    public function setDescripcion($descripcion)
-    {
+    public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
 
         return $this;
@@ -70,8 +67,7 @@ class Localidad
      *
      * @return string 
      */
-    public function getDescripcion()
-    {
+    public function getDescripcion() {
         return $this->descripcion;
     }
 
@@ -81,8 +77,7 @@ class Localidad
      * @param string $codigoPostal
      * @return Localidad
      */
-    public function setCodigoPostal($codigoPostal)
-    {
+    public function setCodigoPostal($codigoPostal) {
         $this->codigoPostal = $codigoPostal;
 
         return $this;
@@ -93,8 +88,33 @@ class Localidad
      *
      * @return string 
      */
-    public function getCodigoPostal()
-    {
+    public function getCodigoPostal() {
         return $this->codigoPostal;
     }
+
+    /**
+     * Set provincia
+     *
+     * @param \Witzke\FacturaBundle\Entity\Provincia $provincia
+     * @return Localidad
+     */
+    public function setProvincia(\Witzke\FacturaBundle\Entity\Provincia $provincia = null) {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return \Witzke\FacturaBundle\Entity\Provincia 
+     */
+    public function getProvincia() {
+        return $this->provincia;
+    }
+
+    public function __toString() {
+        return (string) $this->descripcion;
+    }
+
 }

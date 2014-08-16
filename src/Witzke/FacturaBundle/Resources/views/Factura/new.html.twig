@@ -1,15 +1,67 @@
 {% extends '::base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+<script>
+    //var collectionHolder = $('ul.detalles');
+    var collectionHolder = $('#{{form.detalles.vars.id}}');
 
+// configura una enlace "Agregar una etiqueta"
+    var $addTagLink = $('<a href="#" class="add_tag_link">Agregar Detalle</a>');
+    var $newLinkLi = $('<li></li>').append($addTagLink);
+
+    jQuery(document).ready(function() {
+        // Añade el ancla "Agregar una etiqueta" y las etiquetas li y ul
+        collectionHolder.append($newLinkLi);
+
+        // cuenta las entradas actuales en el formulario (p. ej. 2),
+        // la usa como índice al insertar un nuevo elemento (p. ej. 2)
+        collectionHolder.data('index', collectionHolder.find(':input').length);
+
+        $addTagLink.on('click', function(e) {
+            // evita crear el enlace con una "#" en la URL
+            e.preventDefault();
+
+            // añade una nueva etiqueta form (ve el siguiente bloque de código)
+            addTagForm(collectionHolder, $newLinkLi);
+        });
+    });
+    function addTagForm(collectionHolder, $newLinkLi) {
+        // Obtiene los datos del prototipo explicado anteriormente
+        var prototype = collectionHolder.data('prototype');
+
+        // Consigue el nuevo índice
+        var index = collectionHolder.data('index');
+
+        // Sustituye el '__name__' en el prototipo HTML para que
+        // en su lugar sea un número basado en cuántos elementos hay
+        var newForm = prototype.replace(/__name__/g, index);
+
+        // Incrementa en uno el índice para el siguiente elemento
+        collectionHolder.data('index', index + 1);
+
+        // Muestra el formulario en la página en un elemento li,
+
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+    }
+    </script>
+{% endblock %}
 {% block body -%}
+    
     <h1>Factura creation</h1>
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('factura') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            {#
+            <ul class="detalles" data-prototype="{{ form_widget(form.detalles.vars.prototype.cantidad)|e }}">
+
+            </ul>
+          #}  
+            <a href="{{ path('factura') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
 {% endblock %}

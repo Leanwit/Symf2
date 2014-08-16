@@ -61,4 +61,8 @@ class CondicionPago
     {
         return $this->descripcion;
     }
+    
+    public function __toString() {
+        return (string) $this->descripcion;
+    }
 }

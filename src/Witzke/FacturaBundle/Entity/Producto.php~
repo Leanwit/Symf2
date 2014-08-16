@@ -186,31 +186,4 @@ class Producto
     {
         return $this->fechaAlta;
     }
-
-    /**
-     * Set proveedor
-     *
-     * @param \Witzke\FacturaBundle\Entity\Proveedor $proveedor
-     * @return Producto
-     */
-    public function setProveedor(\Witzke\FacturaBundle\Entity\Proveedor $proveedor = null)
-    {
-        $this->proveedor = $proveedor;
-
-        return $this;
-    }
-
-    /**
-     * Get proveedor
-     *
-     * @return \Witzke\FacturaBundle\Entity\Proveedor 
-     */
-    public function getProveedor()
-    {
-        return $this->proveedor;
-    }
-    
-    public function __toString() {
-        return (string) $this->descripcion;
-    }
 }

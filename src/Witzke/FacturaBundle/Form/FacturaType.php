@@ -21,7 +21,13 @@ class FacturaType extends AbstractType
             ->add('iva')
             ->add('condicionPago')
             ->add('localidad')
-        ;
+                
+        ;        
+        $builder->add('detalles', 'collection', array(
+            'type' => new DetalleType(),
+            'allow_add'    => true, 
+            'by_reference' => false
+            ));
     }
     
     /**

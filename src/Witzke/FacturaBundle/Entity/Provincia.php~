@@ -5,12 +5,12 @@ namespace Witzke\FacturaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Iva
+ * Provincia
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\IvaRepository")
+ * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\ProvinciaRepository")
  */
-class Iva
+class Provincia
 {
     /**
      * @var integer
@@ -24,9 +24,9 @@ class Iva
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
-    private $descripcion;
+    private $nombre;
 
 
     /**
@@ -40,29 +40,25 @@ class Iva
     }
 
     /**
-     * Set descripcion
+     * Set nombre
      *
-     * @param string $descripcion
-     * @return Iva
+     * @param string $nombre
+     * @return Provincia
      */
-    public function setDescripcion($descripcion)
+    public function setNombre($nombre)
     {
-        $this->descripcion = $descripcion;
+        $this->nombre = $nombre;
 
         return $this;
     }
 
     /**
-     * Get descripcion
+     * Get nombre
      *
      * @return string 
      */
-    public function getDescripcion()
+    public function getNombre()
     {
-        return $this->descripcion;
-    }
-    
-    public function __toString() {
-        return (string) $this->descripcion;
+        return $this->nombre;
     }
 }

@@ -78,8 +78,8 @@ class DetalleController extends Controller
      */
     public function newAction()
     {
-        $entity = new Detalle();
-        $form   = $this->createCreateForm($entity);
+        $entity = new Detalle();        
+        $form = $this->createForm(new DetalleType(), $entity);
 
         return $this->render('FacturaBundle:Detalle:new.html.twig', array(
             'entity' => $entity,
