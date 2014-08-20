@@ -3,14 +3,13 @@
 {% block body %}
 <h1>Inicio</h1>
 <ul>        
-    <li><a href="{{ path('factura') }}">Factura</a></li>    
-    <li><a href="{{ path('detalle') }}">Detalle</a></li>    
-    <li><a href="{{ path('iva') }}">Iva</a></li>    
-    <li><a href="{{ path('localidad') }}">Localidad</a></li>    
+    <li><a href="{{ path('factura') }}">Factura</a></li>      
+    <li><a href="{{ path('localidad') }}">Localidad</a></li>  
+    <li><a href="{{ path('provincia') }}">Provincia</a></li>  
     <li><a href="{{ path('producto') }}">Producto</a></li>    
-    <li><a href="{{ path('proveedor') }}">Proveedor</a></li>    
-    <li><a href="{{ path('provincia') }}">Provincia</a></li>   
-    <li><a href="{{ path('condicionpago') }}">Condicion Pago</a></li>   
+    <li><a href="{{ path('proveedor') }}">Proveedor</a></li> 
+    <li><a href="{{ path('condicionpago') }}">Condicion Pago</a></li> 
+    <li><a href="{{ path('iva') }}">Iva</a></li>    
 </ul>
 
 {% endblock %}

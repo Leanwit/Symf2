@@ -3,6 +3,7 @@
 namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Factura
@@ -25,6 +26,7 @@ class Factura
      * @var integer
      *
      * @ORM\Column(name="numeroFactura", type="integer")
+     * @Assert\NotBlank()
      */
     private $numeroFactura;
 
@@ -45,18 +47,21 @@ class Factura
     /**
      * @ORM\ManyToOne(targetEntity="Iva")
      * @ORM\JoinColumn(name="iva_id", referencedColumnName="id")
+     * 
      */
     private $iva;
     
     /**
      * @ORM\ManyToOne(targetEntity="CondicionPago")
      * @ORM\JoinColumn(name="condicionPago_id", referencedColumnName="id")
+     * 
      */
     private $condicionPago;
     
     /**
      * @ORM\ManyToOne(targetEntity="Localidad")
      * @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
+     * 
      */
     private $localidad;
 
