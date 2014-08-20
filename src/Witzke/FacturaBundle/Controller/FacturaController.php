@@ -35,7 +35,7 @@ class FacturaController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Factura();
+        $entity = new Factura();        
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 

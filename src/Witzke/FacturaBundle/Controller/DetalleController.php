@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Witzke\FacturaBundle\Entity\Detalle;
+use Witzke\FacturaBundle\Entity\Factura;
 use Witzke\FacturaBundle\Form\DetalleType;
 
 /**
@@ -33,9 +34,10 @@ class DetalleController extends Controller
      * Creates a new Detalle entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, Factura $unaFactura)
     {
         $entity = new Detalle();
+        $entity->setFactura($unaFactura);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -116,9 +118,11 @@ class DetalleController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
+        
         $entity = $em->getRepository('FacturaBundle:Detalle')->find($id);
-
+        
+        
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Detalle entity.');
         }

@@ -15,9 +15,9 @@ class DetalleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cantidad')
-            ->add('factura')
+            ->add('cantidad')            
             ->add('producto')
+                
         ;
     }
     

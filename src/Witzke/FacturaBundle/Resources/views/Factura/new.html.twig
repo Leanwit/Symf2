@@ -6,7 +6,7 @@
     var collectionHolder = $('#{{form.detalles.vars.id}}');
 
 // configura una enlace "Agregar una etiqueta"
-    var $addTagLink = $('<a href="#" class="add_tag_link">Agregar Detalle</a>');
+    var $addTagLink = $('<br><a href="#" class="add_tag_link">Agregar Detalle</a>');
     var $newLinkLi = $('<li></li>').append($addTagLink);
 
     jQuery(document).ready(function() {
@@ -48,7 +48,7 @@
 {% endblock %}
 {% block body -%}
     
-    <h1>Factura creation</h1>
+    <h1>Creación de la Factura</h1>
 
     {{ form(form) }}
 

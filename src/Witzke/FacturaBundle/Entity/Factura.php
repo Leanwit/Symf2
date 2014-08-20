@@ -234,7 +234,7 @@ class Factura
     public function addDetalle(\Witzke\FacturaBundle\Entity\Detalle $detalles)
     {
         $this->detalles[] = $detalles;
-
+        $detalles->setFactura($this);
         return $this;
     }
 

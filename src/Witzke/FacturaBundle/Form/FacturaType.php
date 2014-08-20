@@ -23,6 +23,7 @@ class FacturaType extends AbstractType
             ->add('localidad')
                 
         ;        
+        
         $builder->add('detalles', 'collection', array(
             'type' => new DetalleType(),
             'allow_add'    => true, 

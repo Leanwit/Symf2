@@ -1,5 +1,5 @@
-factura_homepage:
-    path:     /hello/{name}
+homepage:
+    path:     /index
     defaults: { _controller: FacturaBundle:Default:index }
 
 fos_user_security:
@@ -53,5 +53,5 @@ FacturaBundle_factura:
     resource: "@FacturaBundle/Resources/config/routing/factura.yml"
     prefix:   /factura
 
-    
+
 
