@@ -85,7 +85,6 @@ class Detalle
     public function setFactura(\Witzke\FacturaBundle\Entity\Factura $factura = null)
     {
         $this->factura = $factura;
-
         return $this;
     }
 

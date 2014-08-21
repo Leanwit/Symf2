@@ -46,29 +46,28 @@ class Factura
     
     /**
      * @ORM\ManyToOne(targetEntity="Iva")
-     * @ORM\JoinColumn(name="iva_id", referencedColumnName="id")
-     * 
+     * @ORM\JoinColumn(name="iva_id", referencedColumnName="id")     * 
      */
     private $iva;
     
     /**
      * @ORM\ManyToOne(targetEntity="CondicionPago")
      * @ORM\JoinColumn(name="condicionPago_id", referencedColumnName="id")
-     * 
+     * @Assert\NotNull()
      */
     private $condicionPago;
     
     /**
      * @ORM\ManyToOne(targetEntity="Localidad")
      * @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
-     * 
+     * @Assert\NotNull()
      */
     private $localidad;
 
     
     /**
      * @ORM\OneToMany(targetEntity="Detalle", mappedBy="factura" ,cascade={"persist", "remove"})
-      
+       @Assert\NotNull(message="La factura debe contener al menos un detalle")
      */
     private $detalles;
     /**

@@ -16,10 +16,20 @@ class FacturaType extends AbstractType {
         $builder
                 ->add('numeroFactura')
                 ->add('fecha')
-                ->add('total', 'number')
-                ->add('iva')
-                ->add('condicionPago')
-                ->add('localidad')
+                ->add('total')
+                ->add('iva', 'entity', array('required' => true,
+                    'class' => 'FacturaBundle:Iva',
+                    'empty_value' => ''))
+                ->add('condicionPago','entity', array(
+                    'required'=>true,
+                    'class' => 'FacturaBundle:CondicionPago',
+                    'empty_value' => '',
+                ))
+                ->add('localidad' , 'entity', array(
+                    'required'=>true,
+                    'class' => 'FacturaBundle:Localidad',
+                    'empty_value' => '',
+                ))
 
         ;
 
