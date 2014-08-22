@@ -4,11 +4,13 @@ namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Iva
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\IvaRepository")
+ * @UniqueEntity("descripcion" , message="Ya existe este iva")
  */
 class Iva
 {

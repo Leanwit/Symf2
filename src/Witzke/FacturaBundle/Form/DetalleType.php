@@ -6,26 +6,28 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DetalleType extends AbstractType
-{
-        /**
+class DetalleType extends AbstractType {
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add('cantidad')            
-            ->add('producto')
-                
-        ;
+                ->add('cantidad', 'number', array(
+                    'required' => true
+                ))
+                ->add('producto', 'entity', array('required' => true,
+                    'class' => 'FacturaBundle:Producto',
+                    'empty_value' => ''
+                ))
+            ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'Witzke\FacturaBundle\Entity\Detalle'
         ));
@@ -34,8 +36,8 @@ class DetalleType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return 'witzke_facturabundle_detalle';
     }
+
 }

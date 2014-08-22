@@ -4,12 +4,14 @@ namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Factura
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\FacturaRepository")
+ * 
  */
 class Factura
 {
@@ -34,6 +36,8 @@ class Factura
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="date")
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
      */
     private $fecha;
 

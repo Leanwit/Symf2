@@ -4,11 +4,13 @@ namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Provincia
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\ProvinciaRepository")
+ * @UniqueEntity("nombre" , message="Ya existe esta Provincia")
  */
 class Provincia
 {

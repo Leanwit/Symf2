@@ -4,11 +4,13 @@ namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Proveedor
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\ProveedorRepository")
+ * @UniqueEntity("descripcion" , message="Ya existe este proveedor")
  */
 class Proveedor
 {

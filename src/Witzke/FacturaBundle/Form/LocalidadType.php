@@ -15,9 +15,14 @@ class LocalidadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion')
+            ->add('descripcion','text', array(
+                'required'=>true
+            ))
             ->add('codigoPostal')
-            ->add('provincia')
+            ->add('provincia', 'entity', array('required' => true,
+                    'class' => 'FacturaBundle:Provincia',
+                    'empty_value' => ''
+                ))
         ;
     }
     

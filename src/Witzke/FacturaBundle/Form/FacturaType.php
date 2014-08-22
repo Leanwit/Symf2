@@ -14,12 +14,19 @@ class FacturaType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('numeroFactura')
+                ->add('numeroFactura', 'number', array(
+                    'required' => true
+                ))
                 ->add('fecha', 'date', array(
                     'format' => 'dd-MM-yyyy',
-                    'empty_value' => ''
-                    ))
-                ->add('total')
+                    'empty_value' => '',
+                    'required' => true
+                ))
+                ->add('total', 'number', array(
+                    'read_only' => true,
+                    'empty_data' => '0',
+                    'disabled' => true
+                ))
                 ->add('iva', 'entity', array('required' => true,
                     'class' => 'FacturaBundle:Iva',
                     'empty_value' => ''))

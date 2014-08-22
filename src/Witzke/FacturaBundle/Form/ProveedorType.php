@@ -6,27 +6,33 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProveedorType extends AbstractType
-{
-        /**
+class ProveedorType extends AbstractType {
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add('descripcion')
-            ->add('direccion')
-            ->add('telefono')
-            ->add('email')
+                ->add('descripcion', 'text', array(
+                    'required' => true
+                ))
+                ->add('direccion', 'text', array(
+                    'required' => true
+                ))
+                ->add('telefono', 'text', array(
+                    'required' => true
+                ))
+                ->add('email', 'email', array(
+                    'required' => true
+                ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'Witzke\FacturaBundle\Entity\Proveedor'
         ));
@@ -35,8 +41,8 @@ class ProveedorType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return 'witzke_facturabundle_proveedor';
     }
+
 }
