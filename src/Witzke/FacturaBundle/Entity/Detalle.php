@@ -3,7 +3,7 @@
 namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Detalle
  *
@@ -25,18 +25,21 @@ class Detalle
      * @var integer
      *
      * @ORM\Column(name="cantidad", type="integer")
+     * @Assert\NotBlank()
      */
     private $cantidad;
    
     /**
      * @ORM\ManyToOne(targetEntity="Factura", inversedBy="detalle")
      * @ORM\JoinColumn(name="factura_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $factura;
     
      /**
      * @ORM\ManyToOne(targetEntity="Producto", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="producto_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $producto;
     /**

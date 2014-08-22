@@ -15,18 +15,21 @@ class FacturaType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('numeroFactura')
-                ->add('fecha')
+                ->add('fecha', 'date', array(
+                    'format' => 'dd-MM-yyyy',
+                    'empty_value' => ''
+                    ))
                 ->add('total')
                 ->add('iva', 'entity', array('required' => true,
                     'class' => 'FacturaBundle:Iva',
                     'empty_value' => ''))
-                ->add('condicionPago','entity', array(
-                    'required'=>true,
+                ->add('condicionPago', 'entity', array(
+                    'required' => true,
                     'class' => 'FacturaBundle:CondicionPago',
                     'empty_value' => '',
                 ))
-                ->add('localidad' , 'entity', array(
-                    'required'=>true,
+                ->add('localidad', 'entity', array(
+                    'required' => true,
                     'class' => 'FacturaBundle:Localidad',
                     'empty_value' => '',
                 ))

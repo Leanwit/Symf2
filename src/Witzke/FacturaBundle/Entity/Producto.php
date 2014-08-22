@@ -3,7 +3,7 @@
 namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Producto
  *
@@ -25,6 +25,7 @@ class Producto
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 
@@ -32,6 +33,7 @@ class Producto
      * @var float
      *
      * @ORM\Column(name="precio", type="float")
+     * @Assert\NotBlank()
      */
     private $precio;
 
@@ -39,6 +41,7 @@ class Producto
      * @var float
      *
      * @ORM\Column(name="precioCosto", type="float")
+     * @Assert\NotBlank()
      */
     private $precioCosto;
 
@@ -46,6 +49,7 @@ class Producto
      * @var boolean
      *
      * @ORM\Column(name="activo", type="boolean")
+     * 
      */
     private $activo;
 
@@ -53,12 +57,14 @@ class Producto
      * @var \DateTime
      *
      * @ORM\Column(name="fechaAlta", type="date")
+     * @Assert\NotBlank()
      */
     private $fechaAlta;
     
      /**
      * @ORM\ManyToOne(targetEntity="Proveedor")
      * @ORM\JoinColumn(name="proveedor_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $proveedor;
 

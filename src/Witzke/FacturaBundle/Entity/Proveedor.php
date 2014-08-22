@@ -3,7 +3,7 @@
 namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Proveedor
  *
@@ -25,6 +25,7 @@ class Proveedor
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 
@@ -32,6 +33,7 @@ class Proveedor
      * @var string
      *
      * @ORM\Column(name="direccion", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $direccion;
 
@@ -39,6 +41,7 @@ class Proveedor
      * @var string
      *
      * @ORM\Column(name="telefono", type="string", length=30)
+     * @Assert\NotBlank()
      */
     private $telefono;
 
@@ -46,6 +49,7 @@ class Proveedor
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $email;
 

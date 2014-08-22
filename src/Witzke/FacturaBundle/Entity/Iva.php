@@ -3,7 +3,7 @@
 namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Iva
  *
@@ -25,6 +25,7 @@ class Iva
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 

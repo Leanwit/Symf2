@@ -3,7 +3,7 @@
 namespace Witzke\FacturaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Localidad
  *
@@ -25,6 +25,7 @@ class Localidad {
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 
@@ -32,12 +33,14 @@ class Localidad {
      * @var string
      *
      * @ORM\Column(name="codigoPostal", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $codigoPostal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Provincia")
      * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $provincia;
 
