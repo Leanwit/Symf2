@@ -265,4 +265,12 @@ class Factura
     {
         return $this->detalles;
     }
+    
+    private $provincia;
+    
+    public function getProvincia(){        
+        if($this->localidad !=null){
+        return $this->localidad->getProvincia();}
+    }
+    
 }

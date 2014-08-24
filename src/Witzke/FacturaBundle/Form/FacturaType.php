@@ -5,6 +5,7 @@ namespace Witzke\FacturaBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Witzke\FacturaBundle\Form\EventListeners\AddLocalidadFieldSubscriber;
 
 class FacturaType extends AbstractType {
 
@@ -14,35 +15,40 @@ class FacturaType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('numeroFactura', 'number', array(
-                    'required' => true
-                ))
-                ->add('fecha', 'date', array(
-                    'format' => 'dd-MM-yyyy',
-                    'empty_value' => '',
-                    'required' => true
-                ))
-                ->add('total', 'number', array(
-                    'read_only' => true,
-                    'empty_data' => '0',
-                    'disabled' => true
-                ))
-                ->add('iva', 'entity', array('required' => true,
-                    'class' => 'FacturaBundle:Iva',
-                    'empty_value' => ''))
-                ->add('condicionPago', 'entity', array(
-                    'required' => true,
-                    'class' => 'FacturaBundle:CondicionPago',
-                    'empty_value' => '',
-                ))
-                ->add('localidad', 'entity', array(
-                    'required' => true,
-                    'class' => 'FacturaBundle:Localidad',
-                    'empty_value' => '',
-                ))
+        ->add('numeroFactura', 'number', array(
+        'required' => true
+        ))
+        ->add('fecha', 'date', array(
+        'format' => 'dd-MM-yyyy',
+        'empty_value' => '',
+        'required' => true
+        ))
+        ->add('total', 'number', array(
+        'read_only' => true,
+        'empty_data' => '0',
+        'disabled' => true
+        ))
+        ->add('iva', 'entity', array('required' => true,
+        'class' => 'FacturaBundle:Iva',
+        'empty_value' => ''))
+        ->add('condicionPago', 'entity', array(
+        'required' => true,
+        'class' => 'FacturaBundle:CondicionPago',
+        'empty_value' => '',
+        ))        
+        ->add('provincia', 'entity', array(
+        'class' => 'FacturaBundle:Provincia',        
+            ))
+//        ->add('localidad', 'entity', array(
+//            'required' => true,
+//            'class' => 'FacturaBundle:Localidad',
+//            'empty_value' => '',           
+//        ))
 
         ;
-
+        $factory = $builder->getFormFactory();
+        $localidadSubscriber = new AddLocalidadFieldSubscriber($factory);
+        $builder->addEventSubscriber($localidadSubscriber);
         $builder->add('detalles', 'collection', array(
             'type' => new DetalleType(),
             'allow_add' => true,
