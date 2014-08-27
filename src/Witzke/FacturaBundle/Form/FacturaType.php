@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Witzke\FacturaBundle\Form\EventListeners\AddLocalidadFieldSubscriber;
+use Witzke\FacturaBundle\Form\EventListeners\AddProvinciaFieldSubscriber;
 
 class FacturaType extends AbstractType {
 
@@ -14,6 +15,12 @@ class FacturaType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        $factory = $builder->getFormFactory();
+        $provinciaSubscriber = new AddProvinciaFieldSubscriber($factory);
+        $builder->addEventSubscriber($provinciaSubscriber);
+        $localidadSubscriber = new AddLocalidadFieldSubscriber($factory);
+        $builder->addEventSubscriber($localidadSubscriber);
+        
         $builder
         ->add('numeroFactura', 'number', array(
         'required' => true
@@ -46,9 +53,7 @@ class FacturaType extends AbstractType {
 //        ))
 
         ;
-        $factory = $builder->getFormFactory();
-        $localidadSubscriber = new AddLocalidadFieldSubscriber($factory);
-        $builder->addEventSubscriber($localidadSubscriber);
+        
         $builder->add('detalles', 'collection', array(
             'type' => new DetalleType(),
             'allow_add' => true,

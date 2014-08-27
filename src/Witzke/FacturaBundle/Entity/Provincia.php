@@ -5,6 +5,7 @@ namespace Witzke\FacturaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Provincia
  *
@@ -12,8 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="Witzke\FacturaBundle\Entity\Repository\ProvinciaRepository")
  * @UniqueEntity("nombre" , message="Ya existe esta Provincia")
  */
-class Provincia
-{
+class Provincia {
+
     /**
      * @var integer
      *
@@ -31,14 +32,17 @@ class Provincia
      */
     private $nombre;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Localidad", mappedBy="provincia")
+     */
+    private $localidades;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -48,8 +52,7 @@ class Provincia
      * @param string $nombre
      * @return Provincia
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
 
         return $this;
@@ -60,12 +63,12 @@ class Provincia
      *
      * @return string 
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
-    
+
     public function __toString() {
         return (string) $this->nombre;
     }
+
 }

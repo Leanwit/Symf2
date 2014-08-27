@@ -21,7 +21,7 @@ WHERE localidad.descripcion LIKE :term
         return $query->getArrayResult();
     }
 
-    public function findByProvinceId($provincia_id) {
+    public function findByProvinciaId($provincia_id) {
         $query = $this->getEntityManager()->createQuery("
 SELECT localidad
 FROM FacturaBundle:Localidad localidad

@@ -28,3 +28,7 @@ localidad_delete:
     path:     /{id}/delete
     defaults: { _controller: "FacturaBundle:Localidad:delete" }
     requirements: { _method: post|delete }
+    
+seleccionar_localidad:
+    pattern: /seleccionar
+    defaults: { _controller: 'FacturaBundle:Localidad:seleccionar' }

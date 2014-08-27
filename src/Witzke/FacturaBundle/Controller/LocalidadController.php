@@ -4,7 +4,6 @@ namespace Witzke\FacturaBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Witzke\FacturaBundle\Entity\Localidad;
 use Witzke\FacturaBundle\Form\LocalidadType;
 
@@ -12,29 +11,27 @@ use Witzke\FacturaBundle\Form\LocalidadType;
  * Localidad controller.
  *
  */
-class LocalidadController extends Controller
-{
+class LocalidadController extends Controller {
 
     /**
      * Lists all Localidad entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('FacturaBundle:Localidad')->findAll();
 
         return $this->render('FacturaBundle:Localidad:index.html.twig', array(
-            'entities' => $entities,
+                    'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Localidad entity.
      *
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Localidad();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -48,8 +45,8 @@ class LocalidadController extends Controller
         }
 
         return $this->render('FacturaBundle:Localidad:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -60,8 +57,7 @@ class LocalidadController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Localidad $entity)
-    {
+    private function createCreateForm(Localidad $entity) {
         $form = $this->createForm(new LocalidadType(), $entity, array(
             'action' => $this->generateUrl('localidad_create'),
             'method' => 'POST',
@@ -76,14 +72,13 @@ class LocalidadController extends Controller
      * Displays a form to create a new Localidad entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Localidad();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('FacturaBundle:Localidad:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -91,8 +86,7 @@ class LocalidadController extends Controller
      * Finds and displays a Localidad entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FacturaBundle:Localidad')->find($id);
@@ -104,8 +98,8 @@ class LocalidadController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('FacturaBundle:Localidad:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -113,8 +107,7 @@ class LocalidadController extends Controller
      * Displays a form to edit an existing Localidad entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FacturaBundle:Localidad')->find($id);
@@ -127,21 +120,20 @@ class LocalidadController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('FacturaBundle:Localidad:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Localidad entity.
-    *
-    * @param Localidad $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Localidad $entity)
-    {
+     * Creates a form to edit a Localidad entity.
+     *
+     * @param Localidad $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Localidad $entity) {
         $form = $this->createForm(new LocalidadType(), $entity, array(
             'action' => $this->generateUrl('localidad_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -151,12 +143,12 @@ class LocalidadController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Localidad entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FacturaBundle:Localidad')->find($id);
@@ -176,17 +168,17 @@ class LocalidadController extends Controller
         }
 
         return $this->render('FacturaBundle:Localidad:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Localidad entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -212,13 +204,24 @@ class LocalidadController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('localidad_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('localidad_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
+    public function seleccionarAction() { {
+            $provincia_id = $this->getRequest()->request->get('provincia_id');
+            $em = $this->getDoctrine()->getManager();
+            $localidades = $em->getRepository('FacturaBundle:Trabajo')->findByAreaId($provincia_id);
+            return $this->render('FacturaBundle:Trabajo:localidades.html.twig', array(
+                        "localidades" => $localidades
+            ));
+        }
+    }
 }
+
+    

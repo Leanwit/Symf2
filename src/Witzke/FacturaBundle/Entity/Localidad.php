@@ -40,11 +40,12 @@ class Localidad {
     private $codigoPostal;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Provincia")
-     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
-     * @Assert\NotNull()
-     */
-    private $provincia;
+    * @var \Provincia
+    *
+    * @ORM\ManyToOne(targetEntity="Provincia", inversedBy="provincia", cascade={"remove"})
+    * @ORM\JoinColumn(name="provincia", referencedColumnName="id")
+    */
+private $provincia;
 
     /**
      * Get id
