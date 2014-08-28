@@ -216,8 +216,8 @@ class LocalidadController extends Controller {
     public function seleccionarAction() { {
             $provincia_id = $this->getRequest()->request->get('provincia_id');
             $em = $this->getDoctrine()->getManager();
-            $localidades = $em->getRepository('FacturaBundle:Trabajo')->findByAreaId($provincia_id);
-            return $this->render('FacturaBundle:Trabajo:localidades.html.twig', array(
+            $localidades = $em->getRepository('FacturaBundle:Localidad')->findByProvinciaId($provincia_id);
+            return $this->render('FacturaBundle:Localidad:localidades.html.twig', array(
                         "localidades" => $localidades
             ));
         }

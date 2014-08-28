@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Witzke\FacturaBundle\Entity\Factura;
 use Witzke\FacturaBundle\Form\FacturaType;
+use Witzke\FacturaBundle\Entity\Detalle;
+use Witzke\FacturaBundle\Form\DetalleType;
 
 /**
  * Factura controller.
@@ -75,11 +77,13 @@ class FacturaController extends Controller {
      */
     public function newAction() {
         $entity = new Factura();
+        $detalle = new Detalle();
+        $entity->addDetalle($detalle);
         // $form   = $this->createCreateForm($entity);
-        $form = $this->createForm(new FacturaType(), $entity);
+        $form = $this->createForm(new FacturaType(), $entity);        
         return $this->render('FacturaBundle:Factura:new.html.twig', array(
                     'entity' => $entity,
-                    'form' => $form->createView(),
+                    'form' => $form->createView(),          
         ));
     }
 
