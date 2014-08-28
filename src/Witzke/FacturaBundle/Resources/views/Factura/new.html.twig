@@ -1,9 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends 'FacturaBundle::layout.html.twig' %}
+
 {%block javascripts %}
 {{ parent() }}
 
 <script>
-     //var collectionHolder = $('ul.detalles');
+    //var collectionHolder = $('ul.detalles');
     var collectionHolder = $('#{{form.detalles.vars.id}}');
 
 // configura una enlace "Agregar una etiqueta"
@@ -45,57 +46,51 @@
         var $newFormLi = $('<li></li>').append(newForm);
         $newLinkLi.before($newFormLi);
     }
-            
-    jQuery(document).ready(function($) {
-    $("#witzke_facturabundle_factura_provincia").change(function() {
-    var data = {
-    provincia_id: $(this).val()
-    };
-            $.ajax({
-    type: 'post',
-            url: '{{ path("seleccionar_localidad") }}',
-            data: data,
-            success: function(data) {
-    $('#witzke_facturabundle_factura_localidad').html(data);
-    }
-    });
-    });
-    });
-            $(function() {
-    $("#dialog").dialog({
-    modal: true
-    });
-    });
-    
-    $(document).ready(function ()
-{
-	/* Asociar el evento de clic del botón 'igual'
-	   con la lógica del negocio de la aplicación */
 
-	$('#igual').click(function()
-	{
-		procesar();
-	});
-});
+    jQuery(document).ready(function($) {
+        $("#witzke_facturabundle_factura_provincia").change(function() {
+            var data = {
+                provincia_id: $(this).val()
+            };
+            $.ajax({
+                type: 'post',
+                url: '{{ path("seleccionar_localidad") }}',
+                data: data,
+                success: function(data) {
+                    $('#witzke_facturabundle_factura_localidad').html(data);
+                }
+            });
+        });
+    });
+    $(function() {
+        $("#dialog").dialog({
+            modal: true
+        });
+    });
+
+    
     </script>
 {% endblock %}
 {% block body %}
-
-    <h1>Creación de la Factura</h1>
-
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          
+        </div>
+    </div>
+    
+      <h1>Creación de la Factura</h1>
     {{ form(form) }}
-   
-
-    <ul class="record_actions">
-        <li>
+            <ul class="record_actions">
+                <li>
             {#
             <ul class="detalles" data-prototype="{{ form_widget(form.detalles.vars.prototype.cantidad)|e }}">
 
             </ul>
           #}  
-                <a href="{{ path('factura') }}">
-                    Back to the list
-                </a>
-            </li>
-        </ul>
+                        <a href="{{ path('factura') }}">
+                            Volver al listado
+                        </a>
+                    </li>
+                </ul>
 {% endblock %}

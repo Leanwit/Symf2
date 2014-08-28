@@ -3,12 +3,15 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('bundles/factura/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
+            <link href="{{ asset('bundles/factura/css/bootstrap-responsive.css') }}" type="text/css" rel="stylesheet">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>{% endblock %}
         {% block footer %}<li><a href="{{ path('homepage') }}">Inicio</a></li>{% endblock %}
-    </body>
+</body>
 </html>

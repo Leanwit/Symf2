@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'FacturaBundle::layout.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
 <script>
@@ -47,16 +47,20 @@
     </script>
 {% endblock %}
 {% block body -%}
-    <h1>Factura edit</h1>
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">  <h1>Factura edit</h1>
 
     {{ form(edit_form) }}
-    
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('factura') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+
+            <ul class="record_actions">
+                <li>
+                    <a href="{{ path('factura') }}">
+                        Volver al listado
+                    </a>
+                </li>
+                <li>{{ form(delete_form) }}</li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}

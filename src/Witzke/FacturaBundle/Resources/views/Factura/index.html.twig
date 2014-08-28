@@ -1,45 +1,51 @@
-{% extends '::base.html.twig' %}
+{% extends 'FacturaBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Factura list</h1>
-
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Numerofactura</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+{% block body %}
+<div class="container">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <table class="records_list">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Numerofactura</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('factura_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.numeroFactura }}</td>
-                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.total }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('factura_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('factura_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
+                    <tr>
+                        <td><a href="{{ path('factura_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                        <td>{{ entity.numeroFactura }}</td>
+                        <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ entity.total }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('factura_show', { 'id': entity.id }) }}">Ver</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('factura_edit', { 'id': entity.id }) }}">Editar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
         {% endfor %}
-        </tbody>
-    </table>
+                </tbody>
+            </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('factura_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+            <ul>
+                <li>
+                    <a href="{{ path('factura_new') }}">
+                        Crear una nueva Factura
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div> <!-- /container -->    
+
+
+
     {% endblock %}

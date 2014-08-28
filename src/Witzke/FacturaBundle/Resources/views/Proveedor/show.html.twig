@@ -1,7 +1,12 @@
-{% extends '::base.html.twig' %}
+{% extends 'FacturaBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Proveedor</h1>
+{% block body %}
+<!-- Static navbar -->
+
+<div class="container">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+         <h1>Proveedor</h1>
 
     <table class="record_properties">
         <tbody>
@@ -31,14 +36,17 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('proveedor') }}">
-            Back to the list
+            Volver al listado
         </a>
     </li>
     <li>
         <a href="{{ path('proveedor_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+    </div>
+</div> <!-- /container -->
+   
 {% endblock %}

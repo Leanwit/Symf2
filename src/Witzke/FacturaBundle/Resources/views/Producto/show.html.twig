@@ -1,7 +1,12 @@
-{% extends '::base.html.twig' %}
+{% extends 'FacturaBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Producto</h1>
+{% block body %}
+<!-- Static navbar -->
+
+<div class="container">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Producto</h1>
 
     <table class="record_properties">
         <tbody>
@@ -18,7 +23,7 @@
                 <td>{{ entity.precio }}</td>
             </tr>
             <tr>
-                <th>Preciocosto</th>
+                <th>Precio costo</th>
                 <td>{{ entity.precioCosto }}</td>
             </tr>
             <tr>
@@ -26,7 +31,7 @@
                 <td>{{ entity.activo }}</td>
             </tr>
             <tr>
-                <th>Fechaalta</th>
+                <th>Fecha alta</th>
                 <td>{{ entity.fechaAlta|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
@@ -35,14 +40,17 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('producto') }}">
-            Back to the list
+            Volver al listado
         </a>
     </li>
     <li>
         <a href="{{ path('producto_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+    </div>
+</div> <!-- /container -->
+    
 {% endblock %}

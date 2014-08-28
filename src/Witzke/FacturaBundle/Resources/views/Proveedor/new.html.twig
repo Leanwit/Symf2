@@ -1,15 +1,21 @@
-{% extends '::base.html.twig' %}
+{% extends 'FacturaBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Proveedor creation</h1>
+{% block body %}
+<!-- Static navbar -->
 
+<div class="container">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Crear Proveedor</h1>
     {{ form(form) }}
-
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('proveedor') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+            <li>
+                <a href="{{ path('proveedor') }}">
+                    Volver al listado
+                </a>
+            </li>
+        </ul>
+    </div>
+</div> <!-- /container -->
+
 {% endblock %}

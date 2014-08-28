@@ -1,16 +1,22 @@
-{% extends '::base.html.twig' %}
+{% extends 'FacturaBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Provincia edit</h1>
+{% block body %}
+<!-- Static navbar -->
 
-    {{ form(edit_form) }}
-
+<div class="container">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+    <h1>Editar provincia</h1>
+    <p>{{ form(edit_form) }}</p>
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('provincia') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+            <li>
+                <a href="{{ path('provincia') }}">
+                    Volver al listado
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+    </div>
+</div> <!-- /container -->
+
 {% endblock %}
