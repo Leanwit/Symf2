@@ -8,7 +8,7 @@
     <div class="jumbotron">
           <h1>Iva</h1>
 
-    <table class="record_properties">
+    <table class="table table-striped">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -20,20 +20,14 @@
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('iva') }}">
-            Volver al listado
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('iva_edit', { 'id': entity.id }) }}">
-            Editar
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <table>
+                <tr>
+                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('iva') }}">Volver al listado </button></td> 
+                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('iva_edit', { 'id': entity.id }) }}">Editar</button></td>
+                    <td>{{ form(delete_form) }}</td>        
+                </tr>
+        </table>          
+       
     </div>
 </div> <!-- /container -->
   

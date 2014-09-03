@@ -4,9 +4,27 @@
 {{ parent() }}
 
 <script>
-    //var collectionHolder = $('ul.detalles');
-    var collectionHolder = $('#{{form.detalles.vars.id}}');
+    jQuery(document).ready(function($) {
+        $("#witzke_facturabundle_factura_provincia").change(function() {
+            var data = {
+                provincia_id: $(this).val()
+            };
+            $.ajax({
+                type: 'post',
+                url: '{{ path("seleccionar_localidad") }}',
+                data: data,
+                success: function(data) {
+                    $('#witzke_facturabundle_factura_localidad').html(data);
+                }
+            });
+        });
+    });
+    $('#{{form.detalles.vars.id}}').on('click', function() {
+        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index - 2) + '_cantidad').val();
 
+    });//var collectionHolder = $('ul.detalles');
+    var collectionHolder = $('#{{form.detalles.vars.id}}');
+    
 // configura una enlace "Agregar una etiqueta"
     var $addTagLink = $('<a href="#" class="add_tag_link">Agregar Detalle</a>');
     var $newLinkLi = $('<li></li>').append($addTagLink);
@@ -25,18 +43,22 @@
 
             // añade una nueva etiqueta form (ve el siguiente bloque de código)
             addTagForm(collectionHolder, $newLinkLi);
+
+
         });
     });
     function addTagForm(collectionHolder, $newLinkLi) {
         // Obtiene los datos del prototipo explicado anteriormente
         var prototype = collectionHolder.data('prototype');
 
+        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index) + '_cantidad').val();
+        
         // Consigue el nuevo índice
         var index = collectionHolder.data('index');
-
         // Sustituye el '__name__' en el prototipo HTML para que
         // en su lugar sea un número basado en cuántos elementos hay
         var newForm = prototype.replace(/__name__/g, index);
+
 
         // Incrementa en uno el índice para el siguiente elemento
         collectionHolder.data('index', index + 1);
@@ -45,30 +67,13 @@
 
         var $newFormLi = $('<li></li>').append(newForm);
         $newLinkLi.before($newFormLi);
+
+
     }
 
-    jQuery(document).ready(function($) {
-        $("#witzke_facturabundle_factura_provincia").change(function() {
-            var data = {
-                provincia_id: $(this).val()
-            };
-            $.ajax({
-                type: 'post',
-                url: '{{ path("seleccionar_localidad") }}',
-                data: data,
-                success: function(data) {
-                    $('#witzke_facturabundle_factura_localidad').html(data);
-                }
-            });
-        });
-    });
-    $(function() {
-        $("#dialog").dialog({
-            modal: true
-        });
-    });
-
     
+
+
     </script>
 {% endblock %}
 {% block body %}
@@ -76,21 +81,12 @@
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
             <h1>Creación de la Factura</h1>
-    {{ form(form) }}
+            {{ form(form) }}
             <ul class="record_actions">
-                <li>
-            {#
-            <ul class="detalles" data-prototype="{{ form_widget(form.detalles.vars.prototype.cantidad)|e }}">
-
+                <li><a href="{{ path('factura') }}">  Volver al listado</a></li> 
             </ul>
-          #}  
-                        <a href="{{ path('factura') }}">
-                            Volver al listado
-                        </a>
-                    </li>
-                </ul>
         </div>
     </div>
-    
-    
+
+
 {% endblock %}

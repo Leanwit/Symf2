@@ -6,47 +6,41 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-         <h1>Proveedor</h1>
+        <h1>Proveedor</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ entity.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Direccion</th>
-                <td>{{ entity.direccion }}</td>
-            </tr>
-            <tr>
-                <th>Telefono</th>
-                <td>{{ entity.telefono }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ entity.email }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('proveedor') }}">
-            Volver al listado
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('proveedor_edit', { 'id': entity.id }) }}">
-            Editar
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ entity.id }}</td>
+                </tr>
+                <tr>
+                    <th>Descripcion</th>
+                    <td>{{ entity.descripcion }}</td>
+                </tr>
+                <tr>
+                    <th>Direccion</th>
+                    <td>{{ entity.direccion }}</td>
+                </tr>
+                <tr>
+                    <th>Telefono</th>
+                    <td>{{ entity.telefono }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ entity.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table>
+                <tr>
+                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('proveedor') }}">Volver al listado </button></td> 
+                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('proveedor_edit', { 'id': entity.id }) }}">Editar</button></td>
+                    <td>{{ form(delete_form) }}</td>        
+                </tr>
+        </table>       
     </div>
 </div> <!-- /container -->
-   
+
 {% endblock %}

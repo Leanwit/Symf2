@@ -8,55 +8,48 @@
     <div class="jumbotron">
         <h1>Factura</h1>
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Numerofactura</th>
-            <td>{{ entity.numeroFactura }}</td>
-        </tr>
-        <tr>
-            <th>Fecha</th>
-            <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Total</th>
-            <td>{{ entity.total }}</td>
-        </tr>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ entity.id }}</td>
+                </tr>
+                <tr>
+                    <th>Numerofactura</th>
+                    <td>{{ entity.numeroFactura }}</td>
+                </tr>
+                <tr>
+                    <th>Fecha</th>
+                    <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td>{{ entity.total }}</td>
+                </tr>
 
-    </tbody>
-</table>
-<br><br>
-    Detalle: 
-<table class="detalle" style="border: 1px solid black; ">
-<tr>
-    <th> Producto </th>
-    <th> Cantidad </th> 
-</tr>
+            </tbody>
+        </table>
+        <br><br>
+        Detalle: 
+        <table class="detalle" style="border: 1px solid black; ">
+            <tr>
+                <th> Producto </th>
+                <th> Cantidad </th> 
+            </tr>
 {% for detalle in entity.detalles %}
-<tr>
-   <th>{{ detalle.producto|e }}</th>
-   <th>{{ detalle.cantidad|e }}</th>
-</tr>
+            <tr>
+                <th>{{ detalle.producto|e }}</th>
+                <th>{{ detalle.cantidad|e }}</th>
+            </tr>
 {% endfor %}
-</table><br>
-
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('factura') }}">
-                Volver al listado
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('factura_edit', { 'id': entity.id }) }}">
-                Editar
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+        </table><br>
+        <table>
+            <tr>
+                <td><button class="btn btn-small btn-primary" type="button" href="{{ path('factura') }}">Volver al listado </button></td> 
+                <td><button class="btn btn-small btn-primary" type="button" href="{{ path('factura_edit', { 'id': entity.id }) }}">Editar</button></td>
+                <td>{{ form(delete_form) }}</td>        
+            </tr>
+        </table>      
     </div>
 </div> <!-- /container -->
 

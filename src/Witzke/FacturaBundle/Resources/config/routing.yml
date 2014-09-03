@@ -53,5 +53,9 @@ FacturaBundle_factura:
     resource: "@FacturaBundle/Resources/config/routing/factura.yml"
     prefix:   /factura
 
+login_check:
+  pattern: /login_check
 
+logout:
+  pattern: /logout
 
