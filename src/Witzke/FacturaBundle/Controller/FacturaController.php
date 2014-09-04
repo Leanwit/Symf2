@@ -2,11 +2,13 @@
 
 namespace Witzke\FacturaBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Witzke\FacturaBundle\Entity\Factura;
-use Witzke\FacturaBundle\Form\FacturaType;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Witzke\FacturaBundle\Entity\Detalle;
+use Witzke\FacturaBundle\Entity\Factura;
+use Witzke\FacturaBundle\Form\FacturaFilterType;
+use Witzke\FacturaBundle\Form\FacturaType;
 
 /**
  * Factura controller.
@@ -18,13 +20,26 @@ class FacturaController extends Controller {
      * Lists all Factura entities.
      *
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('FacturaBundle:Factura')->findAll();
 
+        $filterForm = $this->createForm(new FacturaFilterType());
+
+        if ($request->getMethod() == 'POST') {
+            $filterForm->handleRequest($request);
+            if ($filterForm->isValid()) {
+                $arrayFiltros = $filterForm->getData();
+                
+                $servicioBusqueda = $this->get('factura.buscador');
+                $entities = $servicioBusqueda->getAcFacturasFiltradas($arrayFiltros);
+                
+            }
+        }
         return $this->render('FacturaBundle:Factura:index.html.twig', array(
                     'entities' => $entities,
+                    'filter_form' => $filterForm->createView(),
         ));
     }
 
@@ -57,7 +72,7 @@ class FacturaController extends Controller {
      *
      * @param Factura $entity The entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createCreateForm(Factura $entity) {
         $form = $this->createForm(new FacturaType(), $entity, array(
@@ -79,10 +94,10 @@ class FacturaController extends Controller {
         $detalle = new Detalle();
         $entity->addDetalle($detalle);
         // $form   = $this->createCreateForm($entity);
-        $form = $this->createCreateForm($entity);        
+        $form = $this->createCreateForm($entity);
         return $this->render('FacturaBundle:Factura:new.html.twig', array(
                     'entity' => $entity,
-                    'form' => $form->createView(),          
+                    'form' => $form->createView(),
         ));
     }
 
@@ -135,7 +150,7 @@ class FacturaController extends Controller {
      *
      * @param Factura $entity The entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createEditForm(Factura $entity) {
         $form = $this->createForm(new FacturaType(), $entity, array(
@@ -206,7 +221,7 @@ class FacturaController extends Controller {
      *
      * @param mixed $id The entity id
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm($id) {
         return $this->createFormBuilder()

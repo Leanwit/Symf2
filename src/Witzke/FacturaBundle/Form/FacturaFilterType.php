@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Witzke\FacturaBundle\Form\EventListeners\AddLocalidadFieldSubscriber;
 use Witzke\FacturaBundle\Form\EventListeners\AddProvinciaFieldSubscriber;
 
-class FacturaType extends AbstractType {
+class FacturaFilterType extends AbstractType {
 
     /**
      * @param FormBuilderInterface $builder
@@ -23,12 +23,12 @@ class FacturaType extends AbstractType {
         
         $builder
         ->add('numeroFactura', 'number', array(
-        'required' => true
+        'required' => false
         ))
         ->add('fecha', 'date', array(
         'format' => 'dd-MM-yyyy',
         'empty_value' => '',
-        'required' => true
+        'required' => false
         ))
         ->add('total', 'number', array(
         'read_only' => true,
@@ -37,9 +37,11 @@ class FacturaType extends AbstractType {
         ))
         ->add('iva', 'entity', array('required' => true,
         'class' => 'FacturaBundle:Iva',
-        'empty_value' => ''))
+        'empty_value' => '',
+            'required'=> false,
+            ))
         ->add('condicionPago', 'entity', array(
-        'required' => true,
+        'required' => false,
         'class' => 'FacturaBundle:CondicionPago',
         'empty_value' => '',
         ))        
@@ -55,11 +57,11 @@ class FacturaType extends AbstractType {
 
         ;
         
-        $builder->add('detalles', 'collection', array(
-            'type' => new DetalleType(),
-            'allow_add' => true,
-            'by_reference' => false
-        ));
+//        $builder->add('detalles', 'collection', array(
+//            'type' => new DetalleType(),
+//            'allow_add' => true,
+//            'by_reference' => false
+//        ));
     }
 
     /**
@@ -67,7 +69,7 @@ class FacturaType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'Witzke\FacturaBundle\Entity\Factura'
+            'csrf_protection' => false
         ));
     }
 
