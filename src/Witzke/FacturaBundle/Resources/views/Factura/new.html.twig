@@ -4,7 +4,9 @@
 {{ parent() }}
 
 <script>
+    var index = 0;
     jQuery(document).ready(function($) {
+
         $("#witzke_facturabundle_factura_provincia").change(function() {
             var data = {
                 provincia_id: $(this).val()
@@ -19,59 +21,61 @@
             });
         });
     });
+
     $('#{{form.detalles.vars.id}}').on('click', function() {
-        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index - 2) + '_cantidad').val();
 
     });//var collectionHolder = $('ul.detalles');
-    var collectionHolder = $('#{{form.detalles.vars.id}}');
-    
-// configura una enlace "Agregar una etiqueta"
-    var $addTagLink = $('<a href="#" class="add_tag_link">Agregar Detalle</a>');
-    var $newLinkLi = $('<li></li>').append($addTagLink);
 
-    jQuery(document).ready(function() {
-        // Añade el ancla "Agregar una etiqueta" y las etiquetas li y ul
-        collectionHolder.append($newLinkLi);
+    function addTagForm() {
+        // Get the data-prototype explained earlier
+        var prototype = $('div#Factura_detalle').data('prototype');
 
-        // cuenta las entradas actuales en el formulario (p. ej. 2),
-        // la usa como índice al insertar un nuevo elemento (p. ej. 2)
-        collectionHolder.data('index', collectionHolder.find(':input').length);
+        // get the new index
+        var index = $('div#Factura_detalle').data('index');
 
-        $addTagLink.on('click', function(e) {
-            // evita crear el enlace con una "#" en la URL
-            e.preventDefault();
-
-            // añade una nueva etiqueta form (ve el siguiente bloque de código)
-            addTagForm(collectionHolder, $newLinkLi);
-
-
-        });
-    });
-    function addTagForm(collectionHolder, $newLinkLi) {
-        // Obtiene los datos del prototipo explicado anteriormente
-        var prototype = collectionHolder.data('prototype');
-
-        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index) + '_cantidad').val();
-        
-        // Consigue el nuevo índice
-        var index = collectionHolder.data('index');
-        // Sustituye el '__name__' en el prototipo HTML para que
-        // en su lugar sea un número basado en cuántos elementos hay
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
         var newForm = prototype.replace(/__name__/g, index);
 
+        // increase the index with one for the next item
+        $('div#Factura_detalle').data('index', index + 1);
 
-        // Incrementa en uno el índice para el siguiente elemento
-        collectionHolder.data('index', index + 1);
-
-        // Muestra el formulario en la página en un elemento li,
-
-        var $newFormLi = $('<li></li>').append(newForm);
-        $newLinkLi.before($newFormLi);
-
+        // Display the form in the page in an li, before the "Add a address" link li
+        var $newFormLi = $('<div id="detalle"></div>').append(newForm);
+        $newFormLi.append('<a id="cerrar" class="btn btn-danger btn-xs rem_item">X</a>')
+        $('div#detalle-factura').append($newFormLi);
 
     }
 
-    
+    // setup an "add a address" link
+    var newLinkLi = $('a.add_item');
+
+    $(function() {
+       
+        $('div#Factura_detalle').data('index', $('div#Factura_detalle').find(':input').length);
+
+        $('a.add_item').on('click', function(e) {          
+            e.preventDefault();
+            addTagForm();
+        });
+
+        $(document).on('click', 'a.rem_item', function() {
+            $(this).closest('div#detalle').fadeOut(500, function() {
+                $(this).remove();
+            });
+        });
+
+    });    
+    function addTagFormDeleteLink($tagFormLi) {
+        var $removeFormA = $('<a href="#">Borrar este detalle</a>');
+        $tagFormLi.append($removeFormA);
+        $removeFormA.on('click', function(e) {           
+            e.preventDefault();            
+            $tagFormLi.remove();
+        });
+    }
+
+
 
 
     </script>
@@ -81,12 +85,32 @@
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
             <h1>Creación de la Factura</h1>
-            {{ form(form) }}
-            <ul class="record_actions">
-                <li><a href="{{ path('factura') }}">  Volver al listado</a></li> 
-            </ul>
-        </div>
-    </div>
+            <form action="{{ path('factura_create') }}" method="post" {{ form_enctype(form) }}>
+                {{ form_errors(form) }}
+                {{ form_row(form.numeroFactura) }}
+                {{ form_row(form.fecha) }}
+                {{ form_row(form.total) }}
+                {{ form_row(form.iva) }}
+                {{ form_row(form.condicionPago) }}
+                    <span style="display: flex;">
+                    {{ form_row(form.provincia) }}
+                    {{ form_row(form.localidad) }}              
+                        </span>                                    
+
+                            <div id="detalle-factura">
+                                {{form_label(form.detalles)}}<a href="#" class="btn btn-xs btn-info add_item"><i class="glyphicon glyphicon-plus glyphicon-white"></i> Agregar Detalle</a>
+                                {{form_errors(form.detalles)}}
+                            </div>
+
+                        <div class="row items" id="Factura_detalle"   data-prototype="{{form_widget(form.detalles.vars.prototype)|e }}"></div>
 
 
+                        <input type="submit" value="Crear Factura"/>
+                        <div style="visibility: hidden;">{{ form_rest(form) }}</div>                
+                    </form>
+                    <ul class="record_actions">
+                        <li><a href="{{ path('factura') }}">  Volver al listado</a></li> 
+                    </ul>
+                </div>
+            </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace Witzke\FacturaBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -19,9 +20,12 @@ class DetalleType extends AbstractType {
                 ))
                 ->add('producto', 'entity', array('required' => true,
                     'class' => 'FacturaBundle:Producto',
-                    'empty_value' => ''
-                ))
-            ;
+                    'empty_value' => '',
+                    'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('u')
+                                ->where('u.activo = true');
+                    }
+        ));
     }
 
     /**

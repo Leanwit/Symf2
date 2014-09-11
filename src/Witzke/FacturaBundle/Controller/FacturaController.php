@@ -24,7 +24,6 @@ class FacturaController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('FacturaBundle:Factura')->findAll();
-
         $filterForm = $this->createForm(new FacturaFilterType());
 
         if ($request->getMethod() == 'POST') {

@@ -37,10 +37,10 @@
         </tbody>
     </table>
     <table>
-                <tr>
-                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('producto') }}">Volver al listado </button></td> 
-                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('producto_edit', { 'id': entity.id }) }}">Editar</button></td>
-                    <td>{{ form(delete_form) }}</td>        
+                <tr>                   
+                    <td><a class="btn btn-xs btn-info" href="{{ path('producto') }}">Volver al listado </a></td> 
+                    <td><a class="btn btn-xs btn-info" href="{{ path('producto_edit', { 'id': entity.id }) }}">Editar</a></td>
+                    <td>{{ form(delete_form)}}</td>        
                 </tr>
         </table>
     </div>

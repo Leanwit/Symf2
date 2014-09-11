@@ -2,6 +2,7 @@
 
 namespace Witzke\FacturaBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -31,35 +32,37 @@ class FacturaType extends AbstractType {
         'required' => true
         ))
         ->add('total', 'number', array(
-        'read_only' => true,
+        'read_only' => false,
         'empty_data' => '0',
-        'disabled' => true
+        'disabled' => false,          
         ))
         ->add('iva', 'entity', array('required' => true,
         'class' => 'FacturaBundle:Iva',
-        'empty_value' => ''))
+        'empty_value' => '',))        
         ->add('condicionPago', 'entity', array(
         'required' => true,
         'class' => 'FacturaBundle:CondicionPago',
         'empty_value' => '',
         ))        
-//        ->add('provincia', 'entity', array(
-//        'class' => 'FacturaBundle:Provincia',
-//        'mapped'=> false,
-//            ))
-//       ->add('localidad', 'entity', array(
-//            'required' => true,
-//            'class' => 'FacturaBundle:Localidad',
-//            'empty_value' => '',           
-//        ))
+        ->add('provincia', 'entity', array(
+        'class' => 'FacturaBundle:Provincia',
+        'mapped'=> false,        
+            ))
+       ->add('localidad', 'entity', array(
+            'required' => true,
+            'class' => 'FacturaBundle:Localidad',
+            'empty_value' => '',           
+        ))
 
         ;
         
         $builder->add('detalles', 'collection', array(
             'type' => new DetalleType(),
             'allow_add' => true,
-            'by_reference' => false
-        ));
+            'by_reference' => false,
+            'allow_delete' => true,
+            'required' => true,  
+            ));
     }
 
     /**

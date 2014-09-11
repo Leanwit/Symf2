@@ -25,7 +25,8 @@ class ProductoType extends AbstractType {
                     'required' => true,
                     'precision' => 2
                 ))
-                ->add('activo')
+                ->add('activo' , 'checkbox', array (
+                    'required'=>false))
                 ->add('fechaAlta', 'date', array(
                     'format' => 'dd-MM-yyyy',
                     'empty_value' => '',

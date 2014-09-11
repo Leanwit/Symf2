@@ -1,0 +1,38 @@
+/* 
+    Document   : cssPropio
+    Created on : 11/09/2014, 16:48:07
+    Author     : Leanwit
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#detalle-factura div {
+    display: flex;
+    margin-top: 5px;
+}
+
+#detalle-factura > div label {
+    margin-left: 17px;
+    margin-right: 10px;
+}
+
+#detalle-factura input[type="number"] {
+    height: 23px;
+    margin-top: 5px;
+    width: 44px;
+}
+
+
+#detalle-factura a {
+    height: 18px;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+li.sinPunto {
+    list-style: none;
+}

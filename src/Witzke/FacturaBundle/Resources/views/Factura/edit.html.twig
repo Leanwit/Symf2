@@ -24,6 +24,9 @@
             // añade una nueva etiqueta form (ve el siguiente bloque de código)
             addTagForm(collectionHolder, $newLinkLi);
         });
+        $collectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+            });
     });
     function addTagForm(collectionHolder, $newLinkLi) {
         // Obtiene los datos del prototipo explicado anteriormente
@@ -43,7 +46,21 @@
 
         var $newFormLi = $('<li></li>').append(newForm);
         $newLinkLi.before($newFormLi);
+        
+        addTagFormDeleteLink($newFormLi);
     }
+    
+    function addTagFormDeleteLink($tagFormLi) {
+    var $removeFormA = $('<a href="#">delete this tag</a>');
+    $tagFormLi.append($removeFormA);
+
+    $removeFormA.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // remove the li for the tag form
+        $tagFormLi.remove();
+    }); }
     </script>
 {% endblock %}
 {% block body -%}
