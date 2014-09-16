@@ -4,6 +4,7 @@
 {{ parent() }}
 
 <script>
+
     var index = 0;
     jQuery(document).ready(function($) {
 
@@ -22,12 +23,13 @@
         });
     });
 
-    $('#{{form.detalles.vars.id}}').on('click', function() {
+    $('#{{form.detalles.vars.id}}').focus(function() {
 
     });//var collectionHolder = $('ul.detalles');
 
     function addTagForm() {
         // Get the data-prototype explained earlier
+
         var prototype = $('div#Factura_detalle').data('prototype');
 
         // get the new index
@@ -44,19 +46,24 @@
         var $newFormLi = $('<div id="detalle"></div>').append(newForm);
         $newFormLi.append('<a id="cerrar" class="btn btn-danger btn-xs rem_item">X</a>')
         $('div#detalle-factura').append($newFormLi);
-
+        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_cantidad').val();
+        var producto = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_producto').val();
+        aButtonPressed(cantidad,producto);
+         
+        
     }
 
     // setup an "add a address" link
     var newLinkLi = $('a.add_item');
 
     $(function() {
-       
+
         $('div#Factura_detalle').data('index', $('div#Factura_detalle').find(':input').length);
 
-        $('a.add_item').on('click', function(e) {          
+        $('a.add_item').on('click', function(e) {
             e.preventDefault();
             addTagForm();
+
         });
 
         $(document).on('click', 'a.rem_item', function() {
@@ -65,15 +72,31 @@
             });
         });
 
-    });    
+    });
     function addTagFormDeleteLink($tagFormLi) {
         var $removeFormA = $('<a href="#">Borrar este detalle</a>');
         $tagFormLi.append($removeFormA);
-        $removeFormA.on('click', function(e) {           
-            e.preventDefault();            
+        $removeFormA.on('click', function(e) {
+            e.preventDefault();
             $tagFormLi.remove();
         });
     }
+
+    function aButtonPressed(cantidad,producto) {
+        alert(cantidad+producto);
+        $.post('{{path('factura_ajax')}}',
+                {cantidad: cantidad, producto: producto},
+        function(response, prod) {
+            
+            if (response.code == 100 && response.success) {//dummy check
+                alert(response); 
+            }
+             alert(response);
+        }, "json" );
+      
+         
+    }
+
 
 
 
@@ -97,20 +120,20 @@
                     {{ form_row(form.localidad) }}              
                         </span>                                    
 
-                            <div id="detalle-factura">
+                        <div id="detalle-factura">
                                 {{form_label(form.detalles)}}<a href="#" class="btn btn-xs btn-info add_item"><i class="glyphicon glyphicon-plus glyphicon-white"></i> Agregar Detalle</a>
                                 {{form_errors(form.detalles)}}
                             </div>
 
-                        <div class="row items" id="Factura_detalle"   data-prototype="{{form_widget(form.detalles.vars.prototype)|e }}"></div>
+                            <div class="row items" id="Factura_detalle"   data-prototype="{{form_widget(form.detalles.vars.prototype)|e }}"></div>
 
 
-                        <input type="submit" value="Crear Factura"/>
-                        <div style="visibility: hidden;">{{ form_rest(form) }}</div>                
-                    </form>
-                    <ul class="record_actions">
-                        <li><a href="{{ path('factura') }}">  Volver al listado</a></li> 
-                    </ul>
+                            <input type="submit" value="Crear Factura"/>
+                            <div style="visibility: hidden;">{{ form_rest(form) }}</div>                
+                        </form>
+                        <ul class="record_actions">
+                            <li><a href="{{ path('factura') }}">  Volver al listado</a></li> 
+                        </ul>
+                    </div>
                 </div>
-            </div>
 {% endblock %}

@@ -28,3 +28,8 @@ factura_delete:
     path:     /{id}/delete
     defaults: { _controller: "FacturaBundle:Factura:delete" }
     requirements: { _method: post|delete }
+    
+factura_ajax:
+    path:     /new
+    defaults: { _controller: "FacturaBundle:Factura:ajax" }
+

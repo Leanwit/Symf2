@@ -5,8 +5,10 @@ namespace Witzke\FacturaBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Witzke\FacturaBundle\Entity\Detalle;
 use Witzke\FacturaBundle\Entity\Factura;
+use Witzke\FacturaBundle\Entity\Producto;
 use Witzke\FacturaBundle\Form\FacturaFilterType;
 use Witzke\FacturaBundle\Form\FacturaType;
 
@@ -30,10 +32,9 @@ class FacturaController extends Controller {
             $filterForm->handleRequest($request);
             if ($filterForm->isValid()) {
                 $arrayFiltros = $filterForm->getData();
-                
+
                 $servicioBusqueda = $this->get('factura.buscador');
                 $entities = $servicioBusqueda->getAcFacturasFiltradas($arrayFiltros);
-                
             }
         }
         return $this->render('FacturaBundle:Factura:index.html.twig', array(
@@ -229,6 +230,23 @@ class FacturaController extends Controller {
                         ->add('submit', 'submit', array('label' => 'Delete'))
                         ->getForm()
         ;
+    }
+
+    private function ajaxAction() {
+        $request = $this->container->get('request');        
+  $cantidad = $request->query->get('cantidad');
+  $producto_id = $request->query->get('producto');
+  
+  $productoBD = $this->getDoctrine()
+        ->getRepository('FacturaBundle:Producto')
+        ->find($producto_id);
+  
+  //handle data
+  
+  //prepare the response, e.g.
+  $response = array("code" => 100, "success" => true, "prod" =>$productoBD);
+  //you can return result as JSON
+  return new Response(json_encode($response)); 
     }
 
 }
