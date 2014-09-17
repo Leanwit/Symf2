@@ -29,12 +29,14 @@ class FacturaType extends AbstractType {
         ->add('fecha', 'date', array(
         'format' => 'dd-MM-yyyy',
         'empty_value' => '',
-        'required' => true
+        'required' => true,
+         'attr' => array('class'=>'factura_fecha'),
         ))
         ->add('total', 'number', array(
-        'read_only' => false,
-        'empty_data' => '0',
-        'disabled' => false,          
+        'read_only' => true,
+        'data' => 0,
+        'disabled' => false, 
+        'attr' => array('class'=>'factura_total'),
         ))
         ->add('iva', 'entity', array('required' => true,
         'class' => 'FacturaBundle:Iva',

@@ -36,3 +36,9 @@ root {
 li.sinPunto {
     list-style: none;
 }
+
+.factura_fecha{
+    display: -moz-stack;
+    margin-left: 2px;
+    
+}

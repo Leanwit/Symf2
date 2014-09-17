@@ -4,14 +4,15 @@
 {{ parent() }}
 
 <script>
-
+    var contador = 0;
     var index = 0;
     jQuery(document).ready(function($) {
 
         $("#witzke_facturabundle_factura_provincia").change(function() {
+            
             var data = {
                 provincia_id: $(this).val()
-            };
+            };            
             $.ajax({
                 type: 'post',
                 url: '{{ path("seleccionar_localidad") }}',
@@ -20,7 +21,24 @@
                     $('#witzke_facturabundle_factura_localidad').html(data);
                 }
             });
-        });
+        });  
+        
+     $(document).on('change','.choice_producto',function(){             
+            var cantidad = parseFloat($('#witzke_facturabundle_factura_detalles_' + (contador-1) + '_cantidad').val());           
+            var total= parseFloat($('#witzke_facturabundle_factura_total').val());            
+            var data = {
+                producto_id: $(this).val()                
+            };
+            $.ajax({
+                type: 'post',
+                url: '{{ path("ajax") }}',
+                data: data,
+                success: function(data) {  
+                    var subtotal = parseFloat(data)*cantidad;                   
+                    total = subtotal+total; 
+                    $('#witzke_facturabundle_factura_total').val(total);}                
+            });
+        });  
     });
 
     $('#{{form.detalles.vars.id}}').focus(function() {
@@ -41,15 +59,13 @@
 
         // increase the index with one for the next item
         $('div#Factura_detalle').data('index', index + 1);
-
+        contador = contador+1;
         // Display the form in the page in an li, before the "Add a address" link li
         var $newFormLi = $('<div id="detalle"></div>').append(newForm);
         $newFormLi.append('<a id="cerrar" class="btn btn-danger btn-xs rem_item">X</a>')
-        $('div#detalle-factura').append($newFormLi);
-        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_cantidad').val();
-        var producto = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_producto').val();
-        aButtonPressed(cantidad, producto);
-
+        $('div#detalle-factura').append($newFormLi);        
+        var producto = $('#witzke_facturabundle_factura_detalles_' + (index+1) + '_producto').val();        
+      
 
     }
 
@@ -68,6 +84,23 @@
 
         $(document).on('click', 'a.rem_item', function() {
             $(this).closest('div#detalle').fadeOut(500, function() {
+                var total= parseFloat($('#witzke_facturabundle_factura_total').val()); 
+                var cantidad = $(this).find("input").val();               
+                var data = {
+                    producto_id: $(this).find(".choice_producto").val()               
+                 };
+                $.ajax({
+                type: 'post',
+                url: '{{ path("ajax") }}',
+                data: data,
+                success: function(data) {  
+                    var subtotal = parseFloat(data)*cantidad;                   
+                    total = total-subtotal; 
+                    $('#witzke_facturabundle_factura_total').val(total);}                
+            });
+                
+                
+                
                 $(this).remove();
             });
         });
@@ -81,17 +114,10 @@
             $tagFormLi.remove();
         });
     }
+  
 
-    function aButtonPressed(cantidad, producto) {
-       $.post('{{path('factura_ajax')}}',
-                {cantidad: cantidad, producto: producto},
-        function(response) {
-            if (response.code === 200 && response.success) {//dummy check
-
-            }
-
-        }, "json");      
-    }
+  
+    
 
 
 
@@ -107,29 +133,22 @@
             <form action="{{ path('factura_create') }}" method="post" {{ form_enctype(form) }}>
                 {{ form_errors(form) }}
                 {{ form_row(form.numeroFactura) }}
-                {{ form_row(form.fecha) }}
-                {{ form_row(form.total) }}
+                {{ form_row(form.fecha) }}                
                 {{ form_row(form.iva) }}
                 {{ form_row(form.condicionPago) }}
                     <span style="display: flex;">
                     {{ form_row(form.provincia) }}
                     {{ form_row(form.localidad) }}              
-                        </span>                                    
-
+                        </span>
+                {{ form_row(form.total)}}
                         <div id="detalle-factura">
-                                {{form_label(form.detalles)}}<a href="#" class="btn btn-xs btn-info add_item"><i class="glyphicon glyphicon-plus glyphicon-white"></i> Agregar Detalle</a>
-                                {{form_errors(form.detalles)}}
+                                {{form_label(form.detalles)}}<br><a href="#" class="btn btn-xs btn-info add_item"><i class="glyphicon glyphicon-plus glyphicon-white"></i> Agregar Detalle</a>
+                                <p>{{form_errors(form.detalles)}}</p>
                             </div>
-
-                            <div class="row items" id="Factura_detalle"   data-prototype="{{form_widget(form.detalles.vars.prototype)|e }}"></div>
-
-
-                            <input type="submit" value="Crear Factura"/>
-                            <div style="visibility: hidden;">{{ form_rest(form) }}</div>                
-                        </form>
-                        <ul class="record_actions">
-                            <li><a href="{{ path('factura') }}">  Volver al listado</a></li> 
-                        </ul>
+                            <div class="row items" id="Factura_detalle"   data-prototype="{{form_widget(form.detalles.vars.prototype)|e }}"></div>                                
+                            <input type="submit" value="Crear Factura" class="btn-primary btn-sn"> 
+                            <div style="visibility:hidden">{{ form_rest(form) }}</div>                                        
+                        </form>                        
                     </div>
                 </div>
 {% endblock %}

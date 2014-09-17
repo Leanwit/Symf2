@@ -45,6 +45,7 @@ class Factura
      * @var float
      *
      * @ORM\Column(name="total", type="float")
+     * 
      */
     private $total;
     

@@ -2,14 +2,15 @@
 {% block javascripts %}
     {{ parent() }}
 <script>
-    //var collectionHolder = $('ul.detalles');
-     var index = 0;
+    var contador = 0;
+    var index = 0;
     jQuery(document).ready(function($) {
 
         $("#witzke_facturabundle_factura_provincia").change(function() {
+            
             var data = {
                 provincia_id: $(this).val()
-            };
+            };            
             $.ajax({
                 type: 'post',
                 url: '{{ path("seleccionar_localidad") }}',
@@ -18,12 +19,27 @@
                     $('#witzke_facturabundle_factura_localidad').html(data);
                 }
             });
-        });
+        });  
+        
+     $(document).on('change','.choice_producto',function(){             
+            var cantidad = parseFloat($('#witzke_facturabundle_factura_detalles_' + (contador-1) + '_cantidad').val());           
+            var total= parseFloat($('#witzke_facturabundle_factura_total').val());            
+            var data = {
+                producto_id: $(this).val()                
+            };
+            $.ajax({
+                type: 'post',
+                url: '{{ path("ajax") }}',
+                data: data,
+                success: function(data) {  
+                    var subtotal = parseFloat(data)*cantidad;                   
+                    total = subtotal+total; 
+                    $('#witzke_facturabundle_factura_total').val(total);}                
+            });
+        });  
     });
 
-    $('#{{edit_form.detalles.vars.id}}').focus(function() {
-
-    });//var collectionHolder = $('ul.detalles');
+   //var collectionHolder = $('ul.detalles');
 
     function addTagForm() {
         // Get the data-prototype explained earlier
@@ -39,15 +55,13 @@
 
         // increase the index with one for the next item
         $('div#Factura_detalle').data('index', index + 1);
-
+        contador = contador+1;
         // Display the form in the page in an li, before the "Add a address" link li
         var $newFormLi = $('<div id="detalle"></div>').append(newForm);
         $newFormLi.append('<a id="cerrar" class="btn btn-danger btn-xs rem_item">X</a>')
-        $('div#detalle-factura').append($newFormLi);
-        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_cantidad').val();
-        var producto = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_producto').val();
-        aButtonPressed(cantidad, producto);
-
+        $('div#detalle-factura').append($newFormLi);        
+        var producto = $('#witzke_facturabundle_factura_detalles_' + (index+1) + '_producto').val();        
+      
 
     }
 
@@ -66,6 +80,23 @@
 
         $(document).on('click', 'a.rem_item', function() {
             $(this).closest('div#detalle').fadeOut(500, function() {
+                var total= parseFloat($('#witzke_facturabundle_factura_total').val()); 
+                var cantidad = $(this).find("input").val();               
+                var data = {
+                    producto_id: $(this).find(".choice_producto").val()               
+                 };
+                $.ajax({
+                type: 'post',
+                url: '{{ path("ajax") }}',
+                data: data,
+                success: function(data) {  
+                    var subtotal = parseFloat(data)*cantidad;                   
+                    total = total-subtotal; 
+                    $('#witzke_facturabundle_factura_total').val(total);}                
+            });
+                
+                
+                
                 $(this).remove();
             });
         });
@@ -79,23 +110,12 @@
             $tagFormLi.remove();
         });
     }
-
-    function aButtonPressed(cantidad, producto) {
-       $.post('{{path('factura_ajax')}}',
-                {cantidad: cantidad, producto: producto},
-        function(response) {
-            if (response.code === 200 && response.success) {//dummy check
-
-            }
-
-        }, "json");      
-    }
     </script>
 {% endblock %}
 {% block body -%}
     <div class="container">
         <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">  <h1>Factura edit</h1>
+        <div class="jumbotron">  
 
    <h3>Editar factura</h3>
     
@@ -106,8 +126,9 @@
                     <td><a class="btn btn-sm btn-primary" type="button" href="{{ path('factura')}}">Volver al listado</a></td>                    
                     <td>{{ form(delete_form)}}</td>
                 </tr>
-        </table>
-       
+        </table>  
+
+                        
     </div>
     </div>
 {% endblock %}

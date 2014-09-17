@@ -90,10 +90,11 @@ class FacturaController extends Controller {
      */
     public function newAction() {
         $entity = new Factura();
-        $detalle = new Detalle();
-        $entity->addDetalle($detalle);
+       // $detalle = new Detalle();
+        //$entity->addDetalle($detalle);
         // $form   = $this->createCreateForm($entity);
         $form = $this->createCreateForm($entity);
+        
         return $this->render('FacturaBundle:Factura:new.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView(),
@@ -231,30 +232,14 @@ class FacturaController extends Controller {
         ;
     }
 
-    private function ajaxAction() {
-        $request = $this->container->get('request');
-        $cantidad = $request->query->get('cantidad');
-        $producto_id = $request->query->get('producto');
-
-        $producto = $this->getDoctrine()
-                ->getRepository('FacturaBundle:Producto')
-                ->find($producto_id);
-        
-        
-        /*$session = $this->getRequest()->getSession();  
-        $foo = $session->get('foo');*/
-
-         $session = $this->get('session');
-         $session->set('cantidad', $cantidad);
-       
-        //handle data
-//        $session->set('precio', $productoBD->getPrecio());
-        //prepare the response, e.g.
-        //$response = array("code" => 100, "success" => true, 'precio' => $productoBD->getPrecio());
-        //you can return result as JSON
-       // return new Response(json_encode($response));
-         
-         
+    public function ajaxAction() {
+        $producto_id = $this->getRequest()->request->get('producto_id');
+        $em = $this->getDoctrine()->getManager();
+        $producto = $em->getRepository('FacturaBundle:Producto')->find($producto_id);
+        $data = array("code" => 100, "success" => true, "precio" => $producto->getPrecio());   
+          return $this->render('FacturaBundle:Factura:ajax.html.twig', array(
+                        "precio" => $producto->getPrecio()
+            ));
     }
 
 }

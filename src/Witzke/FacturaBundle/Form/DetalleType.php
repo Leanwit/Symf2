@@ -20,7 +20,8 @@ class DetalleType extends AbstractType {
                 ))
                 ->add('producto', 'entity', array('required' => true,
                     'class' => 'FacturaBundle:Producto',
-                    'empty_value' => '',
+                    'empty_value' =>'',
+                    'attr' => array('class'=>'choice_producto'),
                     'query_builder' => function(EntityRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->where('u.activo = true');
