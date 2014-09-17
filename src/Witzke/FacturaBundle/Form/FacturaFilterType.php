@@ -16,25 +16,25 @@ class FacturaFilterType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $factory = $builder->getFormFactory();
-        $provinciaSubscriber = new AddProvinciaFieldSubscriber($factory);
-        $builder->addEventSubscriber($provinciaSubscriber);
-        $localidadSubscriber = new AddLocalidadFieldSubscriber($factory);
-        $builder->addEventSubscriber($localidadSubscriber);
+//        $provinciaSubscriber = new AddProvinciaFieldSubscriber($factory);
+//        $builder->addEventSubscriber($provinciaSubscriber);
+//        $localidadSubscriber = new AddLocalidadFieldSubscriber($factory);
+//        $builder->addEventSubscriber($localidadSubscriber);
         
         $builder
         ->add('numeroFactura', 'number', array(
         'required' => false
         ))
-        ->add('fecha', 'date', array(
-        'format' => 'dd-MM-yyyy',
-        'empty_value' => '',
-        'required' => false
-        ))
-        ->add('total', 'number', array(
-        'read_only' => true,
-        'empty_data' => '0',
-        'disabled' => true
-        ))
+//        ->add('fecha', 'date', array(
+//        'format' => 'dd-MM-yyyy',
+//        'empty_value' => '',
+//        'required' => false
+//        ))
+//        ->add('total', 'number', array(
+//        'read_only' => true,
+//        'empty_data' => '0',
+//        'disabled' => true
+//        ))
         ->add('iva', 'entity', array('required' => true,
         'class' => 'FacturaBundle:Iva',
         'empty_value' => '',

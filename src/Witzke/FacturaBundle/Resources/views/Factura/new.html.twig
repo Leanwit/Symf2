@@ -48,9 +48,9 @@
         $('div#detalle-factura').append($newFormLi);
         var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_cantidad').val();
         var producto = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_producto').val();
-        aButtonPressed(cantidad,producto);
-         
-        
+        aButtonPressed(cantidad, producto);
+
+
     }
 
     // setup an "add a address" link
@@ -82,19 +82,15 @@
         });
     }
 
-    function aButtonPressed(cantidad,producto) {
-        alert(cantidad+producto);
-        $.post('{{path('factura_ajax')}}',
+    function aButtonPressed(cantidad, producto) {
+       $.post('{{path('factura_ajax')}}',
                 {cantidad: cantidad, producto: producto},
-        function(response, prod) {
-            
-            if (response.code == 100 && response.success) {//dummy check
-                alert(response); 
+        function(response) {
+            if (response.code === 200 && response.success) {//dummy check
+
             }
-             alert(response);
-        }, "json" );
-      
-         
+
+        }, "json");      
     }
 
 

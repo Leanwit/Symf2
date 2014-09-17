@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Witzke\FacturaBundle\Entity\Detalle;
 use Witzke\FacturaBundle\Entity\Factura;
-use Witzke\FacturaBundle\Entity\Producto;
 use Witzke\FacturaBundle\Form\FacturaFilterType;
 use Witzke\FacturaBundle\Form\FacturaType;
 
@@ -233,20 +232,29 @@ class FacturaController extends Controller {
     }
 
     private function ajaxAction() {
-        $request = $this->container->get('request');        
-  $cantidad = $request->query->get('cantidad');
-  $producto_id = $request->query->get('producto');
-  
-  $productoBD = $this->getDoctrine()
-        ->getRepository('FacturaBundle:Producto')
-        ->find($producto_id);
-  
-  //handle data
-  
-  //prepare the response, e.g.
-  $response = array("code" => 100, "success" => true, "prod" =>$productoBD);
-  //you can return result as JSON
-  return new Response(json_encode($response)); 
+        $request = $this->container->get('request');
+        $cantidad = $request->query->get('cantidad');
+        $producto_id = $request->query->get('producto');
+
+        $producto = $this->getDoctrine()
+                ->getRepository('FacturaBundle:Producto')
+                ->find($producto_id);
+        
+        
+        /*$session = $this->getRequest()->getSession();  
+        $foo = $session->get('foo');*/
+
+         $session = $this->get('session');
+         $session->set('cantidad', $cantidad);
+       
+        //handle data
+//        $session->set('precio', $productoBD->getPrecio());
+        //prepare the response, e.g.
+        //$response = array("code" => 100, "success" => true, 'precio' => $productoBD->getPrecio());
+        //you can return result as JSON
+       // return new Response(json_encode($response));
+         
+         
     }
 
 }

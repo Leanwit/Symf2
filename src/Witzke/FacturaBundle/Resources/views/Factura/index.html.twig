@@ -2,16 +2,16 @@
 
 {% block body %}
 
-<div class="container">
-<form action="{{path('factura') }}" method="post" {{ form_enctype(filter_form)}}
-      {{form_widget (filter_form)}}
-      
-      <div class="container"><button type="submit"><i class="search"></i> Buscar </button></div>
- </form>
- </div>
+    <div class="container">  
+    <form action="{{path('factura') }}" method="post" {{ form_enctype(filter_form)}}
+          {{form_widget (filter_form)}}<div class="container"><button type="submit" class="btn btn-primary" style="margin-bottom: 10px;"><i class="search"></i>Buscar</button></form></div>
+    
+    </div>
+ 
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
+        <h3>Facturas</h3>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -31,15 +31,11 @@
                         <td>{{ entity.total }}</td>
                         <td>
                             <ul>
-                                <li class="sinPunto">
-                                    <button type="button" class="btn btn-default">
-                                        <a class="glyphicon glyphicon-search" href="{{ path('factura_show', { 'id': entity.id }) }}"></a>
-                                    </button>
+                                <li class="sinPunto">                                    
+                                    <a class="btn btn-default glyphicon glyphicon-search" href="{{ path('factura_show', { 'id': entity.id }) }}"></a>
                                 </li>
-                                <li class="sinPunto">
-                                    <button type="button" class="btn btn-default">
-                                     <a class="glyphicon glyphicon-edit"href="{{ path('factura_edit', { 'id': entity.id }) }}"></a>
-                                    </button>
+                                <li class="sinPunto">                                 
+                                    <a class="btn btn-default glyphicon glyphicon-edit" href="{{ path('factura_edit', { 'id': entity.id }) }}"></a>                                    
                                 </li>
                             </ul>
                         </td>
@@ -47,14 +43,6 @@
         {% endfor %}
                 </tbody>
             </table>
-
-            <ul>
-                <li class="sinPunto">
-                    <a class="btn btn-primary" href="{{ path('factura_new') }}">
-                        Nueva Factura
-                    </a>
-                </li>
-            </ul>
         </div>
     </div> <!-- /container -->    
 

@@ -18,6 +18,17 @@ class FacturaRepository extends EntityRepository
             $qb->where('f.numeroFactura = :nroFactura')
                     ->setParameter('nroFactura', $filtrosArray['numeroFactura']);
         }
+        if($filtrosArray['iva']){
+            $qb->where('f.iva = :iva')
+                    ->setParameter('iva', $filtrosArray['iva']);
+        }
+        if($filtrosArray['condicionPago']){
+            $qb->where('f.condicionPago = :condicionPago')
+                    ->setParameter('condicionPago', $filtrosArray['condicionPago']);
+        } 
+        
+       
+        
         return $qb->getQuery()->getResult();
     }
     
