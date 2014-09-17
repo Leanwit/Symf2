@@ -6,14 +6,13 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Crear Provincia</h1>
-        {{ form(form) }}
-        <ul class="record_actions">
+        <h3>Crear Provincia</h3>
+        {{ form(form) }} 
+          <ul class="record_actions" style="list-style: none;margin-top: 3px;">
             <li>
-                <a class="btn btn-lg btn-primary" href="{{ path('provincia') }}">
-                    Volver al listado
-                </a>
-            </li>            
+                <a class="btn btn-sm btn-primary" type="button" href="{{ path('provincia')}}">Volver al listado</a>                
+            </li>   
+        </ul>         
     </div>
 </div> <!-- /container -->
 

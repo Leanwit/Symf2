@@ -6,7 +6,7 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Proveedor</h1>
+        <h3>Proveedor</h3>
 
         <table class="table table-striped">
             <tbody>
@@ -35,11 +35,11 @@
         
         <table>
                 <tr>
-                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('proveedor') }}">Volver al listado </button></td> 
-                    <td><button class="btn btn-small btn-primary" type="button" href="{{ path('proveedor_edit', { 'id': entity.id }) }}">Editar</button></td>
-                    <td>{{ form(delete_form) }}</td>        
+                    <td><a class="btn btn-sm btn-primary" type="button" href="{{ path('proveedor') }}">Volver al listado </a></td> 
+                    <td><a class="btn btn-sm btn-primary" type="button" href="{{ path('proveedor_edit', { 'id': entity.id }) }}">Editar</a></td>                    
+                    <td>{{ form(delete_form)}}</td>
                 </tr>
-        </table>       
+        </table>      
     </div>
 </div> <!-- /container -->
 

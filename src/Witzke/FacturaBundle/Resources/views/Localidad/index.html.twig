@@ -6,7 +6,7 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Lista de Localidades</h1>
+        <h3>Localidades</h3>
 
     <table class="table table-striped">
         <thead>
@@ -25,26 +25,19 @@
                 <td>{{ entity.codigoPostal }}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('localidad_show', { 'id': entity.id }) }}">Ver</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('localidad_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
+                         <li class="sinPunto">                                    
+                                    <a class="btn btn-default glyphicon glyphicon-search" href="{{ path('localidad_show', { 'id': entity.id }) }}"></a>
+                                </li>
+                                <li class="sinPunto">                                 
+                                    <a class="btn btn-default glyphicon glyphicon-edit" href="{{ path('localidad_edit', { 'id': entity.id }) }}"></a>                                    
+                                </li>
                 </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('localidad_new') }}">
-                Crear una nueva Localidad
-            </a>
-        </li>
-    </ul>
+      
     </div>
 </div> <!-- /container -->
     

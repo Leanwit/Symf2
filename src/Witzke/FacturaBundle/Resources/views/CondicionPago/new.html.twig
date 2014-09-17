@@ -6,16 +6,12 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Crear Condicion de Pago</h1>
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
+        <h3>Crear Condicion de Pago</h3>
+        {{ form(form) }} 
+        <ul class="record_actions" style="list-style: none;margin-top: 3px;">
             <li>
-                <a href="{{ path('condicionpago') }}">
-                    Volver al listado
-                </a>
-            </li>
+                <a class="btn btn-sm btn-primary" type="button" href="{{ path('condicionpago')}}">Volver al listado</a>                
+            </li>   
         </ul>
     </div>
 </div> <!-- /container -->

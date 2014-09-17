@@ -6,18 +6,18 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Editar Localidad</h1>
-
+     <h3>Editar Localidad</h3>
+    
     {{ form(edit_form) }}
-
-        <ul class="record_actions">
-            <li>
-                <a href="{{ path('localidad') }}">
-                    Volver al listado
-                </a>
-            </li>
-            <li>{{ form(delete_form) }}</li>
-        </ul>
+    <table>
+                <tr>
+                    <td>{{ form(edit_form) }}</td> 
+                    <td><a class="btn btn-sm btn-primary" type="button" href="{{ path('localidad')}}">Volver al listado</a></td>                    
+                    <td>{{ form(delete_form)}}</td>
+                </tr>
+        </table>
+       
+    </div>
     </div>
 </div> <!-- /container -->
 

@@ -6,7 +6,7 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-         <h1>Listado de Producto</h1>
+         <h3>Producto</h3>
 
     <table class="table table-striped">
         <thead>
@@ -31,12 +31,12 @@
                 <td>{% if entity.fechaAlta %}{{ entity.fechaAlta|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('producto_show', { 'id': entity.id }) }}">Ver</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('producto_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
+                     <li class="sinPunto">                                    
+                                    <a class="btn btn-default glyphicon glyphicon-search" href="{{ path('producto_show', { 'id': entity.id }) }}"></a>
+                                </li>
+                                <li class="sinPunto">                                 
+                                    <a class="btn btn-default glyphicon glyphicon-edit" href="{{ path('producto_edit', { 'id': entity.id }) }}"></a>                                    
+                                </li>
                 </ul>
                 </td>
             </tr>
@@ -44,13 +44,6 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('producto_new') }}">
-               Crear nuevo Producto
-            </a>
-        </li>
-    </ul>
     </div>
 </div> <!-- /container -->
    

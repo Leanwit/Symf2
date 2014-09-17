@@ -6,7 +6,7 @@
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-          <h1>Listado de Condiciones de Pago</h1>
+          <h3>Listado de Condiciones de Pago</h3>
 
     <table class="table table-striped">
         <thead>
@@ -23,12 +23,12 @@
                 <td>{{ entity.descripcion }}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('condicionpago_show', { 'id': entity.id }) }}">Ver</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('condicionpago_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
+                    <li class="sinPunto">                                    
+                                    <a class="btn btn-default glyphicon glyphicon-search" href="{{ path('condicionpago_show', { 'id': entity.id }) }}"></a>
+                                </li>
+                                <li class="sinPunto">                                 
+                                    <a class="btn btn-default glyphicon glyphicon-edit" href="{{ path('condicionpago_edit', { 'id': entity.id }) }}"></a>                                    
+                                </li>
                 </ul>
                 </td>
             </tr>
@@ -36,13 +36,7 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('condicionpago_new') }}">
-                Crear una nueva Condicion de Pago
-            </a>
-        </li>
-    </ul>
+   
     </div>
 </div> <!-- /container -->
  

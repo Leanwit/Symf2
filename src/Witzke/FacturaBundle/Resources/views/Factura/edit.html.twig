@@ -3,64 +3,93 @@
     {{ parent() }}
 <script>
     //var collectionHolder = $('ul.detalles');
-    var collectionHolder = $('#{{edit_form.detalles.vars.id}}');
+     var index = 0;
+    jQuery(document).ready(function($) {
 
-// configura una enlace "Agregar una etiqueta"
-    var $addTagLink = $('<br><a href="#" class="add_tag_link">Agregar Detalle</a>');
-    var $newLinkLi = $('<li></li>').append($addTagLink);
-
-    jQuery(document).ready(function() {
-        // Añade el ancla "Agregar una etiqueta" y las etiquetas li y ul
-        collectionHolder.append($newLinkLi);
-
-        // cuenta las entradas actuales en el formulario (p. ej. 2),
-        // la usa como índice al insertar un nuevo elemento (p. ej. 2)
-        collectionHolder.data('index', collectionHolder.find(':input').length);
-
-        $addTagLink.on('click', function(e) {
-            // evita crear el enlace con una "#" en la URL
-            e.preventDefault();
-
-            // añade una nueva etiqueta form (ve el siguiente bloque de código)
-            addTagForm(collectionHolder, $newLinkLi);
-        });
-        $collectionHolder.find('li').each(function() {
-                addTagFormDeleteLink($(this));
+        $("#witzke_facturabundle_factura_provincia").change(function() {
+            var data = {
+                provincia_id: $(this).val()
+            };
+            $.ajax({
+                type: 'post',
+                url: '{{ path("seleccionar_localidad") }}',
+                data: data,
+                success: function(data) {
+                    $('#witzke_facturabundle_factura_localidad').html(data);
+                }
             });
+        });
     });
-    function addTagForm(collectionHolder, $newLinkLi) {
-        // Obtiene los datos del prototipo explicado anteriormente
-        var prototype = collectionHolder.data('prototype');
 
-        // Consigue el nuevo índice
-        var index = collectionHolder.data('index');
+    $('#{{edit_form.detalles.vars.id}}').focus(function() {
 
-        // Sustituye el '__name__' en el prototipo HTML para que
-        // en su lugar sea un número basado en cuántos elementos hay
+    });//var collectionHolder = $('ul.detalles');
+
+    function addTagForm() {
+        // Get the data-prototype explained earlier
+
+        var prototype = $('div#Factura_detalle').data('prototype');
+
+        // get the new index
+        var index = $('div#Factura_detalle').data('index');
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
         var newForm = prototype.replace(/__name__/g, index);
 
-        // Incrementa en uno el índice para el siguiente elemento
-        collectionHolder.data('index', index + 1);
+        // increase the index with one for the next item
+        $('div#Factura_detalle').data('index', index + 1);
 
-        // Muestra el formulario en la página en un elemento li,
+        // Display the form in the page in an li, before the "Add a address" link li
+        var $newFormLi = $('<div id="detalle"></div>').append(newForm);
+        $newFormLi.append('<a id="cerrar" class="btn btn-danger btn-xs rem_item">X</a>')
+        $('div#detalle-factura').append($newFormLi);
+        var cantidad = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_cantidad').val();
+        var producto = $('#witzke_facturabundle_factura_detalles_' + (index - 1) + '_producto').val();
+        aButtonPressed(cantidad, producto);
 
-        var $newFormLi = $('<li></li>').append(newForm);
-        $newLinkLi.before($newFormLi);
-        
-        addTagFormDeleteLink($newFormLi);
+
     }
-    
+
+    // setup an "add a address" link
+    var newLinkLi = $('a.add_item');
+
+    $(function() {
+
+        $('div#Factura_detalle').data('index', $('div#Factura_detalle').find(':input').length);
+
+        $('a.add_item').on('click', function(e) {
+            e.preventDefault();
+            addTagForm();
+
+        });
+
+        $(document).on('click', 'a.rem_item', function() {
+            $(this).closest('div#detalle').fadeOut(500, function() {
+                $(this).remove();
+            });
+        });
+
+    });
     function addTagFormDeleteLink($tagFormLi) {
-    var $removeFormA = $('<a href="#">delete this tag</a>');
-    $tagFormLi.append($removeFormA);
+        var $removeFormA = $('<a href="#">Borrar este detalle</a>');
+        $tagFormLi.append($removeFormA);
+        $removeFormA.on('click', function(e) {
+            e.preventDefault();
+            $tagFormLi.remove();
+        });
+    }
 
-    $removeFormA.on('click', function(e) {
-        // prevent the link from creating a "#" on the URL
-        e.preventDefault();
+    function aButtonPressed(cantidad, producto) {
+       $.post('{{path('factura_ajax')}}',
+                {cantidad: cantidad, producto: producto},
+        function(response) {
+            if (response.code === 200 && response.success) {//dummy check
 
-        // remove the li for the tag form
-        $tagFormLi.remove();
-    }); }
+            }
+
+        }, "json");      
+    }
     </script>
 {% endblock %}
 {% block body -%}
@@ -68,16 +97,17 @@
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">  <h1>Factura edit</h1>
 
+   <h3>Editar factura</h3>
+    
     {{ form(edit_form) }}
-
-            <ul class="record_actions">
-                <li>
-                    <a href="{{ path('factura') }}">
-                        Volver al listado
-                    </a>
-                </li>
-                <li>{{ form(delete_form) }}</li>
-            </ul>
-        </div>
+    <table>
+                <tr>
+                    <td>{{ form(edit_form) }}</td> 
+                    <td><a class="btn btn-sm btn-primary" type="button" href="{{ path('factura')}}">Volver al listado</a></td>                    
+                    <td>{{ form(delete_form)}}</td>
+                </tr>
+        </table>
+       
+    </div>
     </div>
 {% endblock %}
